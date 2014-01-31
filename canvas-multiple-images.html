@@ -28,7 +28,7 @@
 
 		var info = document.body.appendChild( document.createElement( 'div' ) );
 		info.style.cssText = 'left: 20px; position: absolute; top: 0px; width: 100% ';
-		info.innerHTML = '<h1>Canvas Multipl Images<h1><div id=dataDiv></div>';
+		info.innerHTML = '<h1>Canvas Multiple Images<h1><div id=dataDiv></div>';
 
 		stats = new Stats();
 		stats.domElement.style.cssText = 'position: absolute; right: 0; top: 0; zIndex: 100; ';
@@ -85,12 +85,14 @@
 	}
 
 	function doIt() {
-		var canvas = document.body.appendChild( document.createElement( 'canvas' ) );
-		canvas.width = canvas.height = side;
+		var canvas = document.createElement( 'canvas' );
+		canvas.width = img1.width;
+		canvas.height =  img1.height;
 		var context = canvas.getContext( '2d' );
+		context.drawImage( img1, 0, 0, canvas.width, canvas.height );
 
 		//context.strokeRect(0, 0, side, side);
-		context.drawImage( img1, 0, 0, s05, s05 );
+		// context.drawImage( img1, 0, 0, s05, s05 );
 
 		var texture = new THREE.Texture( img1 );
 		texture.needsUpdate = true;
