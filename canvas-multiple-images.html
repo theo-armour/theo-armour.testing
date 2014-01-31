@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang=en>
 <head>
-<title></title>
+<title>Hello San Francisco</title>
 <meta charset=utf-8>
 </head>
 <body>
@@ -11,100 +11,135 @@
 <script>
 	var renderer, scene, camera, controls, stats;
 	var canvas, context;
-	// var img1 = new Image(), img2 = new Image(), img3 = new Image(), img4 = new Image();
-	var img1;
-	var side = 750;
-	var s05 = side * 0.5;
+	var density = 16;
+	var tilesPerSide = 32;
+	var tiles = [];
+/*
+		var zoom = 7;
+		var x = 20;
+		var y = 49;
+
+		var zoom = 8;
+		var x = 40;
+		var y = 98;
+
+		var zoom = 9;
+		var x = 81;
+		var y = 197;
+
+		var zoom = 10;
+		var x = 163;
+		var y = 395;
+
+		var zoom = 11;
+		var x = 327;
+		var y = 791;
+
+		var zoom = 12;
+		var x = 654;
+		var y = 1582;
+*/
+
+	var zoom = 13;
+	var x = 1308;
+	var y = 3165;
+
 	init();
 	animate();
-	
-	var geometry, material, mesh;
 
 	function init() {
-
-
+		var geometry, material, mesh;
 		var css = document.body.appendChild( document.createElement('style') );
 		css.innerHTML = 'body { font: 600 12pt monospace; margin: 0; overflow: hidden; }';
 
 		var info = document.body.appendChild( document.createElement( 'div' ) );
 		info.style.cssText = 'left: 20px; position: absolute; top: 0px; width: 100% ';
-		info.innerHTML = '<h1>Canvas Multiple Images<h1><div id=dataDiv></div>';
+		info.innerHTML = '<h1>Hello San Francisco<h1><div id=dataDiv></div>';
 
 		stats = new Stats();
 		stats.domElement.style.cssText = 'position: absolute; right: 0; top: 0; zIndex: 100; ';
 		document.body.appendChild( stats.domElement );
 
-		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
+		renderer = new THREE.WebGLRenderer( { antialias: true }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		renderer.shadowMapEnabled = true;
 		document.body.appendChild( renderer.domElement );
 		scene = new THREE.Scene();
 
-		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
-		camera.position.set( 100, 100, 100 );
+		camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
+		camera.position.set( 0, 400, 800 );
 		controls = new THREE.TrackballControls( camera, renderer.domElement );
 
 		THREE.ImageUtils.crossOrigin = 'anonymous';
+
 // axes
 		scene.add( new THREE.ArrowHelper( v(1, 0, 0), v(0, 0, 0), 30, 0xcc0000) );
 		scene.add( new THREE.ArrowHelper( v(0, 1, 0), v(0, 0, 0), 30, 0x00cc00) );
 		scene.add( new THREE.ArrowHelper( v(0, 0, 1), v(0, 0, 0), 30, 0x0000cc) );
 
+		for (var i = 0; i < tilesPerSide; i++) {
+			for (var j = 0; j < tilesPerSide; j++) {
+				doIt( zoom, x + i, y + j, -384 + i * 256, -384 + j * 256 );
+			}
+		}
 
-
-		var zoom = 7;
-		var x = 20;
-		var y = 49;
-
-
-		img1 = document.createElement( 'img' );
-		img1.src = 'http://b.tile.openstreetmap.org/' + ( zoom  + 1) + '/' + ( 2 * x ) + '/' + ( 2 * y ) + '.png';
-		img1.onload = doIt;
-
-/*
-		img2.onload = function() { context.drawImage( img2, s05, 0, s05, s05 ); };
-		img2.src = 'http://b.tile.openstreetmap.org/' + ( zoom  + 1) + '/' + ( 2 * x + 1) + '/' + ( 2 * y ) + '.png';
-
-		img3.onload = function() { context.drawImage( img3, 0, s05, s05, s05 ); };
-		img3.src = 'http://b.tile.openstreetmap.org/' + ( zoom  + 1) + '/' + ( 2 * x)  + '/' + ( 2 * y + 1 ) + '.png';
-
-		img4.onload = function() { context.drawImage( img4, s05, s05, s05, s05 ); };
-		img4.src = 'http://b.tile.openstreetmap.org/' + ( zoom  + 1) + '/' + ( 2 * x +1) + '/' + ( 2 * y + 1) + '.png';
-
-
-
-		texture.needsUpdate = true;
-// ground plane
-		
-*/
-
-		// var texture = THREE.ImageUtils.loadTexture( "../../textures/the-scream.jpg" );
-
-
-
+		heightMap = new Image();
+		heightMap.src =  '../../../git-repos/jaanga.github.io/projects/terrain-de3-0-31' + '/' + 20 + '/' + 49 +'.png';
+		// heightMap.src =  'http://jaanga.github.io/terrain-de3-0-31' + '/' + 20 + '/' + 49 +'.png';
+		heightMap.onload = initCanvas;
 	}
 
-	function doIt() {
-		var canvas = document.createElement( 'canvas' );
-		canvas.width = img1.width;
-		canvas.height =  img1.height;
-		var context = canvas.getContext( '2d' );
-		context.drawImage( img1, 0, 0, canvas.width, canvas.height );
-
-		//context.strokeRect(0, 0, side, side);
-		// context.drawImage( img1, 0, 0, s05, s05 );
-
-		var texture = new THREE.Texture( img1 );
-		texture.needsUpdate = true;
-
-		geometry = new THREE.CubeGeometry( 200, 20, 200 );
-		material = new THREE.MeshBasicMaterial( { color: 0xff0000, map: texture } );
-
-
-
+	function doIt( zoom, xTile, yTile, xPos, yPos) {
+		//texture = THREE.ImageUtils.loadTexture( 'http://b.tile.openstreetmap.org/' + zoom + '/' + xTile +  '/' + yTile + '.png' );
+		texture = THREE.ImageUtils.loadTexture( 'http://mt1.google.com/vt/lyrs=s&x=' + xTile + "&y=" + yTile + "&z=" + zoom );
+		geometry = new THREE.PlaneGeometry( 256, 256, density - 1, density - 1);
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -Math.PI / 2 ) );
+		material = new THREE.MeshBasicMaterial( { map: texture, shading: THREE.SmoothShading } );
 		mesh = new THREE.Mesh( geometry, material );
-		mesh.position.set( 0, -10, 0 );
+		mesh.position.set( xPos, 0, yPos );
 		scene.add( mesh );
+		tiles.push( mesh );
+	}
+
+	function initCanvas() {
+		canvas = document.createElement( 'canvas' );
+		canvas.width = heightMap.width;
+		canvas.height =  heightMap.height;
+		context = canvas.getContext( '2d' );
+
+		for (var cnt = 0, i = 0; i < tilesPerSide; i++) {
+			for (var j = 0; j < tilesPerSide; j++) {
+				updateVertices( cnt++, x + i, y + j );
+			}
+		}
+	}
+
+	function updateVertices( i, x, y ) {
+		var imgd, verts ;
+		var zoomScale = pow( 2, zoom - 7);
+		var xLength = heightMap.width / zoomScale;
+		var yLength = heightMap.height / zoomScale;
+
+		var xHeightMapTile = 20;
+		var yHeightMapTile = 49;
+
+		var xHeightMapTileZoom = zoomScale * xHeightMapTile;
+		var yHeightMapTileZoom = zoomScale * yHeightMapTile;
+
+		xDelta = x - xHeightMapTileZoom;
+		yDelta = y - yHeightMapTileZoom;
+
+		var xStart = xDelta * xLength;
+		var yStart = yDelta * yLength;
+		context.drawImage( heightMap, xStart - 2, yStart - 2, xLength + 2, yLength + 2, 0, 0, density, density);
+		imgd = context.getImageData( 0, 0, density, density ).data;
+		mesh = tiles[i];
+		verts = mesh.geometry.vertices;
+		var scl = 0.35 * ( parseInt( zoom, 10) + 1);
+		for (var i = 0, j = 0, len = imgd.length; i < len; i += 4) {
+			verts[j++].y = scl * imgd[i];;
+		}
+		mesh.geometry.verticesNeedUpdate = true;
 	}
 
 	function animate() {
@@ -115,6 +150,9 @@
 	}
 
 	function v( x, y, z ){ return new THREE.Vector3( x, y, z ); }
+	function cos( a ){ return Math.cos( a ); }
+	function sin( a ){ return Math.sin( a ); }
+	function pow( a, b ){ return Math.pow( a, b ); }
 </script>
 </body>
 </html>
