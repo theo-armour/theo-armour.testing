@@ -12,9 +12,9 @@
 	var renderer, scene, camera, controls, stats;
 	var canvas, context;
 	// var img1 = new Image(), img2 = new Image(), img3 = new Image(), img4 = new Image();
-var img1;
-		var side = 750;
-		var s05 = side * 0.5;
+	var img1;
+	var side = 750;
+	var s05 = side * 0.5;
 	init();
 	animate();
 	
@@ -28,7 +28,7 @@ var img1;
 
 		var info = document.body.appendChild( document.createElement( 'div' ) );
 		info.style.cssText = 'left: 20px; position: absolute; top: 0px; width: 100% ';
-		info.innerHTML = '<h1>Boilerplate<h1><div id=dataDiv></div>';
+		info.innerHTML = '<h1>Canvas Multipl Images<h1><div id=dataDiv></div>';
 
 		stats = new Stats();
 		stats.domElement.style.cssText = 'position: absolute; right: 0; top: 0; zIndex: 100; ';
@@ -57,9 +57,10 @@ var img1;
 		var y = 49;
 
 
-		img1 = document.body.appendChild( document.createElement( 'img' ) );
-		img1.onload = doIt;
+		img1 = document.createElement( 'img' );
 		img1.src = 'http://b.tile.openstreetmap.org/' + ( zoom  + 1) + '/' + ( 2 * x ) + '/' + ( 2 * y ) + '.png';
+		img1.onload = doIt;
+
 /*
 		img2.onload = function() { context.drawImage( img2, s05, 0, s05, s05 ); };
 		img2.src = 'http://b.tile.openstreetmap.org/' + ( zoom  + 1) + '/' + ( 2 * x + 1) + '/' + ( 2 * y ) + '.png';
@@ -90,6 +91,7 @@ var img1;
 
 		//context.strokeRect(0, 0, side, side);
 		context.drawImage( img1, 0, 0, s05, s05 );
+
 		var texture = new THREE.Texture( img1 );
 		texture.needsUpdate = true;
 
