@@ -102,6 +102,9 @@
 	}
 
 	function initCanvas() {
+		canvas = document.createElement( 'canvas' );
+		canvas.width = heightMap.width;
+		canvas.height =  heightMap.height;
 
 
 		for (var cnt = 0, i = 0; i < tilesPerSide; i++) {
@@ -109,13 +112,11 @@
 				updateVertices( cnt++, x + i, y + j );
 			}
 		}
+
 	}
 
 	function updateVertices( i, x, y ) {
-		var canvas = document.createElement( 'canvas' );
-		canvas.width = heightMap.width;
-		canvas.height =  heightMap.height;
-		var context = canvas.getContext( '2d' );
+
 
 		var imgd, verts ;
 		var zoomScale = pow( 2, zoom - 7);
@@ -133,13 +134,17 @@
 
 		var xStart = xDelta * xLength;
 		var yStart = yDelta * yLength;
+
+		var context = canvas.getContext( '2d' );
 		context.drawImage( heightMap, xStart - 2, yStart - 2, xLength + 2, yLength + 2, 0, 0, density, density);
-		imgd = context.getImageData( 0, 0, density, density ).data;
+		imgd = context.getImageData( 0, 0, density, density );
+		var pix = imgd.data;
+
 		mesh = tiles[i];
 		verts = mesh.geometry.vertices;
 		var scl = 0.35 * ( parseInt( zoom, 10) + 1);
-		for (var i = 0, j = 0, len = imgd.length; i < len; i += 4) {
-			verts[j++].y = scl * imgd[i];;
+		for (var i = 0, j = 0, len = pix.length; i < len; i += 4) {
+			verts[j++].y = scl * pix[i];;
 		}
 		mesh.geometry.verticesNeedUpdate = true;
 	}
