@@ -102,10 +102,7 @@
 	}
 
 	function initCanvas() {
-		canvas = document.createElement( 'canvas' );
-		canvas.width = heightMap.width;
-		canvas.height =  heightMap.height;
-		context = canvas.getContext( '2d' );
+
 
 		for (var cnt = 0, i = 0; i < tilesPerSide; i++) {
 			for (var j = 0; j < tilesPerSide; j++) {
@@ -115,6 +112,11 @@
 	}
 
 	function updateVertices( i, x, y ) {
+		var canvas = document.createElement( 'canvas' );
+		canvas.width = heightMap.width;
+		canvas.height =  heightMap.height;
+		var context = canvas.getContext( '2d' );
+
 		var imgd, verts ;
 		var zoomScale = pow( 2, zoom - 7);
 		var xLength = heightMap.width / zoomScale;
