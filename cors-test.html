@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang=en>
+<head>
+<title></title>
+<meta charset=utf-8>
+<meta name=author content='Theo Armour'>
+</head>
+<body>
+<script>
+
+	document.body.style.cssText = ' font: bold 12pt monospace; ';
+	var info = document.body.appendChild( document.createElement( 'div' ) );
+	info.innerHTML = '<h1>cors test</h1>';
+
+
+	var img = document.body.appendChild( document.createElement('img') );
+
+	// img.crossOrigin = '';
+
+	img.onload = function(e) {
+		context.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+		// var url = canvas.toDataURL(); // Read succeeds, canvas won't be dirty.
+
+	};
+
+	img.src = 'http://jaanga.github.io/terrain/0/0/0.png' ;
+
+	var canvas = document.body.appendChild( document.createElement( 'canvas' ) );
+	canvas.width = 256;
+	canvas.height =  256;
+	var context = canvas.getContext( '2d' );
+
+</script>
+</body>
+</html>
