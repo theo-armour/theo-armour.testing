@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang=en >
+<head>
+<title>Howdy</title>
+<meta charset=utf-8 />
+<meta name=author content='Theo Armour' />
+</head>
+<body>
+<script src=http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js ></script>
+<script>
+	var VH = VH || {};
+
+
+
+	function init() {
+
+		var txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+		var css = document.body.appendChild( document.createElement('style') );
+		css.innerHTML = 'body { color: #ccc; font: 600 12pt monospace; margin: 0; overflow: hidden; }' +
+			'h1 a { color: #ccc; text-decoration: none; }' +
+		'';
+
+		var header = document.body.appendChild( document.createElement( 'div' ) );
+		header.style.cssText = 'position: absolute; right: 20px; transition: right 1s; ';
+		header.innerHTML = '<h1>' +
+			'<a href=JavaScript:slideMenu(); ><i class="fa fa-bars"></a></i>'+
+		'</h1>';
+
+		var menu =  header.appendChild( document.createElement( 'div' ) );
+		menu.style.cssText = 'height: ' + ( 0.95 * window.innerHeight ) + 'px; overflow: auto; position: absolute; right: -250px;  top: 0; width: 230px; ';
+		menu.innerHTML = '<a href="" ><h2>menu</h2></a>'  + 
+			'<p>' + txt + '</p>' +
+			'<p>' + txt + '</p>' +
+		'';
+
+//		VH.displayMarkdown( '../../readme.md', menu );
+
+	}
+
+	function slideMenu(){
+		header.style.right = header.style.right === '20px' ? '250px' : '20px';
+// console.log( header.style.right );
+	}
+
+
+	VH.displayMarkdown = function( fname, panel ) {
+
+		var converter = new Showdown.converter();
+
+		VH.requestFile( fname, callback );
+
+		function callback() {
+
+			text = VH.xmlHttp.responseText;
+console.log( text );
+			panel.innerHTML = panel.header + converter.makeHtml( text );
+
+//			menuLeft.style.display = 'none';
+
+//			if ( app && app.menuLeft ) app.menuLeft.style.display = 'none';
+
+			panel.style.display = '';
+
+		}
+
+	};
+
+	VH.requestFile = function( fileName, callback ){
+
+		VH.xmlHttp = new XMLHttpRequest ();
+		VH.xmlHttp.open( 'GET', fileName, true );
+		VH.xmlHttp.onreadystatechange = callback;
+		VH.xmlHttp.send( null );
+//		return xmlHttp.responseText;
+
+	};
+
+	init();
+
+</script>
+</body>
+</html>
