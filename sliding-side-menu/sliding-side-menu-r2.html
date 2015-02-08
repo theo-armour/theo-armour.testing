@@ -18,13 +18,13 @@
 	'';
 
 	var header = document.body.appendChild( document.createElement( 'div' ) );
-	header.style.cssText = 'position: absolute; right: 20px; top: 0px; transition: right 1s; ';
+	header.style.cssText = 'position: absolute; right: 20px; transition: right 1s; ';
 	header.innerHTML = '<h1>' +
 		'<a href=JavaScript:slideMenu(); ><i class="fa fa-bars"></a></i>'+
 	'</h1>';
 
 	var menu =  header.appendChild( document.createElement( 'div' ) );
-	menu.style.cssText = 'position: absolute; right: -250px; top: 0px; width: 200px; ';
+	menu.style.cssText = 'height: ' + ( 0.95 * window.innerHeight ) + 'px; overflow: auto; position: absolute; right: -250px;  top: 0; width: 230px; ';
 	menu.innerHTML = '<h2>menu</h2>'  + 
 		'<p>' + txt + '</p>' +
 		'<p>' + txt + '</p>' +
