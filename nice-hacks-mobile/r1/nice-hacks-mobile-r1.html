@@ -1,16 +1,20 @@
 <!doctype html>
 <html lang=en >
 <head>
-<title>Howdy</title>
+<title>Sliding Side Menu R2</title>
 <meta charset=utf-8 />
+<meta name=viewport content=width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0 />
 <meta name=author content='Theo Armour' />
+<link rel=stylesheet href=http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css />
 </head>
 <body>
 <script src=http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js ></script>
 <script>
-	var VH = VH || {};
 
+	var header, menu;
+	var xmlHttp;
 
+	init();
 
 	function init() {
 
@@ -21,62 +25,118 @@
 			'h1 a { color: #ccc; text-decoration: none; }' +
 		'';
 
-		var header = document.body.appendChild( document.createElement( 'div' ) );
+		header = document.body.appendChild( document.createElement( 'div' ) );
 		header.style.cssText = 'position: absolute; right: 20px; transition: right 1s; ';
 		header.innerHTML = '<h1>' +
 			'<a href=JavaScript:slideMenu(); ><i class="fa fa-bars"></a></i>'+
 		'</h1>';
 
-		var menu =  header.appendChild( document.createElement( 'div' ) );
-		menu.style.cssText = 'height: ' + ( 0.95 * window.innerHeight ) + 'px; overflow: auto; position: absolute; right: -250px;  top: 0; width: 230px; ';
-		menu.innerHTML = '<a href="" ><h2>menu</h2></a>'  + 
-			'<p>' + txt + '</p>' +
-			'<p>' + txt + '</p>' +
+		menu =  header.appendChild( document.createElement( 'div' ) );
+
+		menu.style.cssText = 'background-color: #eee; height: ' + ( 0.95 * window.innerHeight ) + 'px; padding: 0 15px; overflow: auto; ' +
+			'position: absolute; right: -350px;  top: 0; width: 300px; ';
+		menu.header = '<a href="" ><h2>menu</h2></a>'  + 
+//			'<p>' + txt + '</p>' +
+//			'<p>' + txt + '</p>' +
 		'';
 
-//		VH.displayMarkdown( '../../readme.md', menu );
+		displayMarkdown( '../../readme.md', menu );
+
+		loadFileMD( '../../lorem.md' );
 
 	}
 
 	function slideMenu(){
-		header.style.right = header.style.right === '20px' ? '250px' : '20px';
+		header.style.right = header.style.right === '20px' ? '350px' : '20px';
 // console.log( header.style.right );
 	}
 
-
-	VH.displayMarkdown = function( fname, panel ) {
+	function displayMarkdown( fname, panel ) {
 
 		var converter = new Showdown.converter();
 
-		VH.requestFile( fname, callback );
+		requestFile( fname, callback );
 
 		function callback() {
 
-			text = VH.xmlHttp.responseText;
-console.log( text );
-			panel.innerHTML = panel.header + converter.makeHtml( text );
+			text = xmlHttp.responseText;
 
-//			menuLeft.style.display = 'none';
-
-//			if ( app && app.menuLeft ) app.menuLeft.style.display = 'none';
-
-			panel.style.display = '';
+//			panel.innerHTML = panel.header + converter.makeHtml( text );
+			panel.innerHTML = converter.makeHtml( text );
 
 		}
 
 	};
 
-	VH.requestFile = function( fileName, callback ){
+	function requestFile( fileName, callback ){
 
-		VH.xmlHttp = new XMLHttpRequest ();
-		VH.xmlHttp.open( 'GET', fileName, true );
-		VH.xmlHttp.onreadystatechange = callback;
-		VH.xmlHttp.send( null );
-//		return xmlHttp.responseText;
+		xmlHttp = new XMLHttpRequest ();
+		xmlHttp.open( 'GET', fileName, true );
+		xmlHttp.onreadystatechange = callback;
+		xmlHttp.send( null );
 
 	};
 
-	init();
+	function loadFileMD ( url, parameters ) {
+
+		var parameters = parameters ? parameters : 'none';
+
+		var iframes = document.getElementsByTagName( 'iframe' );
+
+		for ( var i = 0, len = iframes.length; i < len; i++ ) {
+
+			iframes[0].parentNode.removeChild( iframes[ 0 ] );
+
+		}
+
+		ifr = document.body.appendChild( document.createElement( 'iframe' ) );
+		ifr.width = window.innerWidth;
+		ifr.height = window.innerHeight;
+		ifr.style.cssText = 'border-width: 0; position: absolute; z-index: -10';
+		ifr.onload = function() {};
+
+		var srcdoc = 
+			"<div id=doc >" +
+
+			"<script src=http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js ><\/script>" +
+
+			"<script>" +
+
+			"	var xmlHttp;" +
+
+			"	var converter = new Showdown.converter();" +
+
+			"	doc.style.cssText = 'font: bold 12pt monospace; max-width: 900px';" +
+
+			"	var info = doc.appendChild( document.createElement( 'div' ) );" +
+
+			"	requestFile( '" + url + "' );" +
+
+			"	function callback() {" +
+
+			"		text = xmlHttp.responseText;" +
+			"		text = converter.makeHtml( text );" +
+			"		info.innerHTML = text;" +
+
+			"	}" +
+
+			"	function requestFile( fileName ) {" +
+
+			"		xmlHttp = null;" +
+			"		xmlHttp = new XMLHttpRequest();" +
+			"		xmlHttp.open( 'GET', fileName, true );" +
+			"		xmlHttp.onreadystatechange = callback;" +
+			"		xmlHttp.send( null );" +
+
+			"	}" +
+
+			"<\/script>"
+			"<\/div>"
+		"";
+
+		ifr.srcdoc = srcdoc;
+
+	};
 
 </script>
 </body>
