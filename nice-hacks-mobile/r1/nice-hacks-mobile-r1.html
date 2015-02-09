@@ -102,19 +102,17 @@
 		ifr.onload = function() {};
 
 		var srcdoc = 
-			"<div id=doc >" +
+			"<div id=doc ><\/div>" +
 
 			"<script src=http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js ><\/script>" +
 
 			"<script>" +
 
+			"	doc.style.cssText = 'font: bold 12pt monospace; max-width: 900px';" +
+
 			"	var xmlHttp;" +
 
 			"	var converter = new Showdown.converter();" +
-
-			"	doc.style.cssText = 'font: bold 12pt monospace; max-width: 900px';" +
-
-			"	var info = doc.appendChild( document.createElement( 'div' ) );" +
 
 			"	requestFile( '" + url + "' );" +
 
@@ -122,7 +120,7 @@
 
 			"		text = xmlHttp.responseText;" +
 			"		text = converter.makeHtml( text );" +
-			"		info.innerHTML = text;" +
+			"		doc.innerHTML = text;" +
 
 			"	}" +
 
@@ -136,8 +134,8 @@
 
 			"	}" +
 
-			"<\/script>"
-			"<\/div>"
+			"<\/script>" +
+
 		"";
 
 		ifr.srcdoc = srcdoc;
