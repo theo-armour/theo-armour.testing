@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang=en >
 <head>
-<title>Sliding Side Menu R2</title>
+<title>Nice Hacks Mobile R1</title>
 <meta charset=utf-8 />
 <meta name=viewport content=width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0 />
 <meta name=author content='Theo Armour' />
@@ -21,7 +21,7 @@
 		var txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
 
 		var css = document.body.appendChild( document.createElement('style') );
-		css.innerHTML = 'body { color: #ccc; font: 600 12pt monospace; margin: 0; overflow: hidden; }' +
+		css.innerHTML = 'body { font: 600 12pt monospace; margin: 0; overflow: hidden; }' +
 			'h1 a { color: #ccc; text-decoration: none; }' +
 		'';
 
@@ -32,7 +32,6 @@
 		'</h1>';
 
 		menu =  header.appendChild( document.createElement( 'div' ) );
-
 		menu.style.cssText = 'background-color: #eee; height: ' + ( 0.95 * window.innerHeight ) + 'px; padding: 0 15px; overflow: auto; ' +
 			'position: absolute; right: -350px;  top: 0; width: 300px; ';
 		menu.header = '<a href="" ><h2>menu</h2></a>'  + 
@@ -40,9 +39,13 @@
 //			'<p>' + txt + '</p>' +
 		'';
 
-		displayMarkdown( '../../readme.md', menu );
+		loadMarkdownInMenu( '../../readme.md', menu );
 
-		loadFileMD( '../../lorem.md' );
+		loadMarkdownInIframe( '../../lorem.md' );
+
+		slideMenu();
+
+		window.addEventListener ( 'hashchange', onHashChange, false );
 
 	}
 
@@ -51,7 +54,18 @@
 // console.log( header.style.right );
 	}
 
-	function displayMarkdown( fname, panel ) {
+	function onHashChange() {
+
+		parameters = location.hash.split ( '#' );
+
+		if ( parameters[ 1 ].substr( -4 ) === 'html' ) {
+
+			loadHTMLInIframe( parameters )
+
+		}
+	}
+
+	function loadMarkdownInMenu( fname, panel ) {
 
 		var converter = new Showdown.converter();
 
@@ -68,16 +82,8 @@
 
 	};
 
-	function requestFile( fileName, callback ){
 
-		xmlHttp = new XMLHttpRequest ();
-		xmlHttp.open( 'GET', fileName, true );
-		xmlHttp.onreadystatechange = callback;
-		xmlHttp.send( null );
-
-	};
-
-	function loadFileMD ( url, parameters ) {
+	function loadMarkdownInIframe( url, parameters ) {
 
 		var parameters = parameters ? parameters : 'none';
 
@@ -135,6 +141,37 @@
 		"";
 
 		ifr.srcdoc = srcdoc;
+
+	};
+
+	function loadHTMLInIframe( parameters ) {
+
+		var parameters = parameters ? parameters : 'none';
+
+		var iframes = document.getElementsByTagName( 'iframe' );
+
+		for ( var i = 0, len = iframes.length; i < len; i++ ) {
+
+			iframes[0].parentNode.removeChild( iframes[ 0 ] );
+
+		}
+
+		ifr = document.body.appendChild( document.createElement( 'iframe' ) );
+		ifr.width = window.innerWidth;
+		ifr.height = window.innerHeight;
+		ifr.style.cssText = 'border-width: 0; position: absolute; z-index: -10';
+		ifr.onload = function() {};
+
+		ifr.src = parameters[ 1 ];
+
+	}
+
+	function requestFile( fileName, callback ){
+
+		xmlHttp = new XMLHttpRequest ();
+		xmlHttp.open( 'GET', fileName, true );
+		xmlHttp.onreadystatechange = callback;
+		xmlHttp.send( null );
 
 	};
 
