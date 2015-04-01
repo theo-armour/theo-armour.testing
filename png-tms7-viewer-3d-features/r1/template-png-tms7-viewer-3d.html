@@ -150,6 +150,7 @@
 //		heightMap.style.cssText = 'border: 1px red solid; position: absolute; top: 0; left: 400px; z-index: 10; ';
 
 		heightMap = new Image();
+		heightMap.crossOrigin = 'Anonymous';
 //		heightMap = document.createElement( 'img' );
 		heightMap.onload = initCanvas;
 
@@ -553,6 +554,7 @@ console.log( 'p', p );
 		function loadImage( fileName, x, y ) {
 
 			var img = document.createElement( 'img' );
+			img.crossOrigin = 'Anonymous';
 			img.src = dir + fileName;
 
 			img.onload = function(){
