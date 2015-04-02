@@ -269,7 +269,7 @@
 
 	function getGazetteerGEBCO() {
 
-		var data = requestGazetteer( 'http://jaanga.github.io/terrain-plus/terrain-plus/gazetteer/gebco-undersea-feature-names-gazetteer.csv' );
+		var data = requestGazetteer( 'http://jaanga.github.io/terrain-plus/gazetteer/gebco-undersea-feature-names-gazetteer.csv' );
 		var xmlHttp;
 
 		function requestGazetteer( fileName ) {
@@ -452,6 +452,7 @@ console.log( 'p', p );
 		sprite.position.set( x, y, z ) ;
 		sprite.scale.set( scale * texture.image.width, scale * texture.image.height );
 		return sprite;
+
 	}
 
 

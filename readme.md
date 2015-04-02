@@ -1,7 +1,9 @@
 [theo-armour.testing]( ./nice-hacks-mobile-r2.html )
 ===
 
-<http://theo-armour.github.io/theo-armour.testing/png-tms7-viewer-3d-features/r1/png-tms7-viewer-3d.html>  
+viewer: <http://theo-armour.github.io/theo-armour.testing/png-tms7-viewer-3d-features/r1/png-tms7-viewer-3d.html>  
+template: <http://theo-armour.github.io/theo-armour.testing/png-tms7-viewer-3d-features/r1/template-png-tms7-viewer-3d.html>  
+
 
 <http://theo-armour.github.io/theo-armour.testing/nice-hacks-mobile/r1/nice-hacks-mobile-r1.html>  
 
