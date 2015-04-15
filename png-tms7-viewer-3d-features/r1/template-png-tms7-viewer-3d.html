@@ -36,7 +36,7 @@
 	var canvasHeightMap, canvasTileMap, contextTileMap;
 	var canvasMap, contextMap;
 
-	var contextTMS, pix;
+	var contextTMS, rgb;
 	var grid;
 	var gazetteer;
 	var placards;
@@ -737,7 +737,7 @@ console.log( 'p', p );
 
 		var image = contextTMS.getImageData( 0, 0, 256, 256 );
 
-		pix = image.data;
+		rgb = image.data;
 
 		var geometry = new THREE.PlaneBufferGeometry( 256, 256, 255, 255 );
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
@@ -750,9 +750,9 @@ console.log( 'p', p );
 
 		var scl = 0.001 * scale;
 
-		for ( var i = 0, j = 1; i < pix.length; i += 4, j += 3 ) {
+		for ( var i = 0, j = 1; i < rgb.length; i += 4, j += 3 ) {
 
-			elevation = pix[ i ] + 256 * pix[ i + 1 ] + 65536 * pix[ i + 2 ] ;
+			elevation = rgb[ i ] + 256 * rgb[ i + 1 ] + 65536 * rgb[ i + 2 ] ;
 
 			elevation = ( elevation < 32768 ) ? elevation : elevation - 16777215;
 
@@ -762,7 +762,7 @@ console.log( 'p', p );
 
 if ( elevation < -11000 ) {
 
-console.log( pix[ i ] + ' ' + pix[ i + 1 ] + ' ' + pix[ i + 2 ]  + ' ' + pix[ i + 3 ] );
+console.log( rgb[ i ] + ' ' + rgb[ i + 1 ] + ' ' + rgb[ i + 2 ]  + ' ' + rgb[ i + 3 ] );
 
 }
 */
