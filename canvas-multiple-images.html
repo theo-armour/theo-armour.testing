@@ -70,7 +70,7 @@
 		camera.position.set( 0, 400, 800 );
 		controls = new THREE.TrackballControls( camera, renderer.domElement );
 
-		// THREE.ImageUtils.crossOrigin = 'anonymous';
+		THREE.ImageUtils.crossOrigin = 'anonymous';
 
 // axes
 		scene.add( new THREE.ArrowHelper( v(1, 0, 0), v(0, 0, 0), 30, 0xcc0000) );
@@ -84,6 +84,7 @@
 		}
 
 		heightMap = new Image();
+		heightMap.crossOrigin = 'anonymous';
 		// heightMap.src =  '../../../git-repos/jaanga.github.io/projects/terrain-de3-0-31' + '/' + 20 + '/' + 49 +'.png';
 		heightMap.src =  'http://jaanga.github.io/terrain-de3-0-31' + '/' + 20 + '/' + 49 +'.png';
 		heightMap.onload = initCanvas;

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang=en >
 <head>
-<title>Tzzz Grid View Read Me</title>
+<title>Theo Armour Testing</title>
 <meta charset=utf-8 />
 </head>
 <body>
@@ -9,23 +9,32 @@
 <script>
 // Let's a read me file written in MarkDown be viewable as HTML
 
-	var text = requestFile( 'readme.md' );
-
-	var converter = new Showdown.converter();
-
-	text = converter.makeHtml( text );
-
 	document.body.style.cssText = ' font: bold 12pt monospace; max-width:900px;';
 
 	var info = document.body.appendChild( document.createElement( 'div' ) );
-	info.innerHTML = text;
+	var converter = new Showdown.converter();
+	var xmlHttp;
 
-	function requestFile( fname ) {
-		var xmlHttp = null;
+	requestFile( 'readme.md' );
+
+	function requestFile( fileName ) {
+
 		xmlHttp = new XMLHttpRequest();
-		xmlHttp.open( 'GET', fname, false );
+		xmlHttp.open( 'GET', fileName, true );
+		xmlHttp.onreadystatechange = callback;
 		xmlHttp.send( null );
-		return xmlHttp.responseText;
+
+	}
+
+	function callback() {
+
+		if ( xmlHttp.readyState != 4  ) { return; }
+
+		var text = xmlHttp.responseText;
+		text = converter.makeHtml( text );
+		info.innerHTML = text;
+
+
 	}
 
 </script>
