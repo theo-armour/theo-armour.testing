@@ -9,7 +9,7 @@ WikiHouse is an open source building system. Many designers, collaborating to ma
 
 This script is a first pass at enabling the WikiHouse designs to be viewable using free, open source software while online and hosted an a free platform.
  
-You should be able to rotate, zoom and and pan the structure using your ointing device or one, two and three fingers.
+You should be able to rotate, zoom and and pan the structure using your pointing device or one, two and three fingers.
 
 The structure is set up in the air so that you may inspect the underside of the structure.
 
