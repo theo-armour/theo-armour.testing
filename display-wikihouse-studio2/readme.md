@@ -9,7 +9,12 @@ WikiHouse is an open source building system. Many designers, collaborating to ma
 
 This script is a first pass at enabling the WikiHouse designs to be viewable using free, open source software while online and hosted an a free platform.
  
+You should be able to rotate, zoom and and pan the structure using your ointing device or one, two and three fingers.
+
+The structure is set up in the air so that you may inspect the underside of the structure.
+
 There are a number of issues to be resolved - particularly the long load times. 
+
 Latest release: [Display WikiHouse Studio2]( http://theo-armour.github.io/theo-armour.testing/display-wikihouse-studio2/display-wikihouse-studio2-r1.html )
 
 [Source code on GitHub]( https://github.com/theo-armour/theo-armour.testing/tree/gh-pages/display-wikihouse-studio2 )
@@ -25,7 +30,7 @@ A mouse or other pointing device with a scroll wheel is also highly recommended 
  
 The apps here are currently being built and tested with the Google Chrome browser. 
 
-Script is not running under Internet Explorer.
+Script is not running under Internet Explorer. May be running under FireFox. Safari: unlikely.
 
 Bugs on browsers other than Chrome need not be reported until such time as the work settles down and an effort to support more browsers is initiated.
 
