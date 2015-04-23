@@ -1,7 +1,7 @@
 Display WikiHouse Studio2 R1
 ===
 
-<span style=display:none; >[View as web page]( theo-armour.github.io/theo-armour.testing/index.html#./display-wikihouse-studio2/readme.md# "view the files as apps." ) <input value="<< You are here" size=15 style="font:bold 11pt monospace;border-width:0;" ></span>  
+<span style=display:none; >[View as web page]( http://theo-armour.github.io/theo-armour.testing/index.html#./display-wikihouse-studio2/readme.md# "view the files as apps." ) <input value="<< You are here" size=15 style="font:bold 11pt monospace;border-width:0;" ></span>  
 
 
 [WikiHouse]( http://www.wikihouse.cc/ )  
@@ -9,6 +9,7 @@ WikiHouse is an open source building system. Many designers, collaborating to ma
 
 This script is a first pass at enabling the WikiHouse designs to be viewable using free, open source software while online and hosted an a free platform.
  
+There are a number of issues to be resolved - particularly the long load times. 
 Latest release: [Display WikiHouse Studio2]( http://theo-armour.github.io/theo-armour.testing/display-wikihouse-studio2/display-wikihouse-studio2-r1.html )
 
 [Source code on GitHub]( https://github.com/theo-armour/theo-armour.testing/tree/gh-pages/display-wikihouse-studio2 )
@@ -26,7 +27,7 @@ The apps here are currently being built and tested with the Google Chrome browse
 Bugs on browsers other than Chrome need not be reported until such time as the work settles down and an effort to support more browsers is initiated.
 
 ### Copyright and License
-All work herein is under a [MIT License](http://jaanga.github.io/libs/jaanga-copyright-and-mit-license.md) 
+All work herein is under an [MIT License](http://jaanga.github.io/libs/jaanga-copyright-and-mit-license.md) 
 or a CC-BY-SA 4.0 license - as appropriate.
 
 ### WikiHouse Commons
