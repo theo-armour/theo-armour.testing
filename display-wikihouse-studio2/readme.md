@@ -24,6 +24,9 @@ Successful use of the apps on a phone or tablet is highly unlikely.
 A mouse or other pointing device with a scroll wheel is also highly recommended so that you can zoom, pant and rotate in 3D.
  
 The apps here are currently being built and tested with the Google Chrome browser. 
+
+Script is not running under Internet Explorer.
+
 Bugs on browsers other than Chrome need not be reported until such time as the work settles down and an effort to support more browsers is initiated.
 
 ### Copyright and License
