@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang=en >
 <head>
-<title>Display WikiHouse Studio2 R1</title>
+<title>Display WikiHouse Studio2 R2</title>
 <meta charset=utf-8 />
 <meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' />
 </head>
@@ -14,6 +14,10 @@
 
 	var fileName = 'Studio12_upload.dae';
 
+	var stretchX = 5;
+	var stretchY = 3;
+	var stretchZ = 8;
+	
 	var info, renderer, scene, camera, controls, stats, light;
 	var geometry, material, mesh, helper;
 
@@ -28,10 +32,11 @@
 		'';
 
 		info = document.body.appendChild( document.createElement( 'div' ) );
-		info.style.cssText = 'left: 20px; position: absolute; top: 0px; width: 100% ';
+		info.style.cssText = 'left: 20px; position: absolute; top: 0px; ';
 		info.innerHTML = '<h1><a href="" >' + document.title + '</a> - ' +
 			'<a id=i href=http://theo-armour.github.io/theo-armour.testing/#./display-wikihouse-studio2/readme.md# >&#x24D8;</a>' +
 			'</h1>' +
+			'<p><label><input type=checkbox id=inpExplode onclick=setExplodeStructure(); /> Exploded View</label></p>' +
 			'<div id=msg></div>' +
 		'';
 
@@ -122,14 +127,12 @@
 
 					child.castShadow = true;
 					child.receiveShadow = true;
-//					child.frustumCulled = false;
 
 					if ( child.material.map ) {
 
 						child.material.map.minFilter = child.material.map.magFilter = THREE.NearestFilter;
 						child.material.map.wrapS = child.material.map.wrapT = THREE.RepeatWrapping;
 						child.material.map.wrapS = child.material.map.wrapT = THREE.ClampToEdgeWrapping
-//						child.material.map.needsUpdate = true;
 
 					}
 
@@ -144,6 +147,35 @@
 		setRandomGradient();
 
 	}
+
+	function setExplodeStructure() {
+
+		if ( inpExplode.checked === true ) {
+
+			x = stretchX;
+			y = stretchY;
+			z = stretchZ;
+
+		} else {
+
+			x = 1 / stretchX;
+			y = 1 / stretchY;
+			z = 1 / stretchZ;
+
+		}
+
+		var cc = scene.children[7].children[0].children;
+
+		for ( var i = 0; i < cc.length; i++ ) {
+
+			p = cc[ i ].position;
+			cc[ i ].position.set( x * p.x, y * p.y, z * p.z );
+
+//console.log(  'name', cc[ i ].name );
+		}
+
+	}
+
 
 	function setRandomGradient() {
 
