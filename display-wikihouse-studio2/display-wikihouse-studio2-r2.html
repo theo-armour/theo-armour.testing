@@ -13,10 +13,6 @@
 <script>
 
 	var fileName = 'Studio12_upload.dae';
-
-	var stretchX = 5;
-	var stretchY = 3;
-	var stretchZ = 8;
 	
 	var info, renderer, scene, camera, controls, stats, light;
 	var geometry, material, mesh, helper;
@@ -36,7 +32,7 @@
 		info.innerHTML = '<h1><a href="" >' + document.title + '</a> - ' +
 			'<a id=i href=http://theo-armour.github.io/theo-armour.testing/#./display-wikihouse-studio2/readme.md# >&#x24D8;</a>' +
 			'</h1>' +
-			'<p><label><input type=checkbox id=inpExplode onclick=setExplodeStructure(); /> Exploded View</label></p>' +
+			'<p>Exploded View<br><input type=range id=inpStretch min=10 max=100 value=10 step=5 onchange=setExplodeStructure(); /></p>' +
 			'<div id=msg></div>' +
 		'';
 
@@ -149,29 +145,24 @@
 	}
 
 	function setExplodeStructure() {
+		var s = parseFloat( inpStretch.value ) / 10;
 
-		if ( inpExplode.checked === true ) {
-
-			x = stretchX;
-			y = stretchY;
-			z = stretchZ;
-
-		} else {
-
-			x = 1 / stretchX;
-			y = 1 / stretchY;
-			z = 1 / stretchZ;
-
-		}
-
-		var cc = scene.children[7].children[0].children;
+		cc = scene.children[7].children[0].children;
 
 		for ( var i = 0; i < cc.length; i++ ) {
 
-			p = cc[ i ].position;
-			cc[ i ].position.set( x * p.x, y * p.y, z * p.z );
+			if ( !cc[ i ].positionStart ) {
+
+				cc[ i ].positionStart = cc[ i ].position.clone();
+
+			}
+
+			p = cc[ i ].positionStart;
+
+			cc[ i ].position.set( s * p.x, s * p.y, s * p.z );
 
 //console.log(  'name', cc[ i ].name );
+
 		}
 
 	}

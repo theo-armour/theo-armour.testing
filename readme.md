@@ -1,7 +1,7 @@
 [theo-armour.testing]( ./index.html )
 ===
 
-<span style=display:none; >[View as web page]( theo-armour.github.io/theo-armour.testing/index.html "view the files as apps." ) <input value="<< You are here" size=15 style="font:bold 11pt monospace;border-width:0;" ></span>  
+<span style=display:none; >[View as web page]( http://theo-armour.github.io/theo-armour.testing/index.html "view the files as apps." ) <input value="<< You are here" size=15 style="font:bold 11pt monospace;border-width:0;" ></span>  
 
 [Source code on GitHub]( https://github.com/theo-armour/theo-armour.testing )
 
