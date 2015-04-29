@@ -1,4 +1,4 @@
-Display WikiHouse Studio2 R1
+Display WikiHouse Studio2 Read Me
 ===
 
 <span style=display:none; >[View as web page]( http://theo-armour.github.io/theo-armour.testing/index.html#./display-wikihouse-studio2/readme.md# "view the files as apps." ) <input value="<< You are here" size=15 style="font:bold 11pt monospace;border-width:0;" ></span>  
@@ -15,9 +15,25 @@ The structure is set up in the air so that you may inspect the underside of the 
 
 There are a number of issues to be resolved - particularly the long load times. 
 
-Latest release: [Display WikiHouse Studio2]( http://theo-armour.github.io/theo-armour.testing/display-wikihouse-studio2/display-wikihouse-studio2-r1.html )
+Latest release: [Display WikiHouse Studio2]( http://theo-armour.github.io/theo-armour.testing/display-wikihouse-studio2/latest/index.html )
 
 [Source code on GitHub]( https://github.com/theo-armour/theo-armour.testing/tree/gh-pages/display-wikihouse-studio2 )
+
+### Features
+
+* Enables real-time zoom, pan and rotate of the desig
+* Views have have shade and shadow
+* Slider bar controls exploded view
+* Background is three circular gradients with random colors
+ 
+
+### Road Map
+
+* Highlight and heads-up display of clicked-on object properties
+	* display link to spec clause, bom etc
+* Obtain access to data for individual components
+	* rebuild as JSN/STL files
+
 
 ### System Requirements
 

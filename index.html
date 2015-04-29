@@ -24,9 +24,11 @@
 		fileName = location.hash.split( '#' )[1];
 	}
 
+	window.addEventListener ( 'hashchange', onHashChange, false );
+
 	requestFile( fileName );
 
-	window.addEventListener ( 'hashchange', onHashChange, false );
+
 
 	function requestFile( fileName ) {
 
