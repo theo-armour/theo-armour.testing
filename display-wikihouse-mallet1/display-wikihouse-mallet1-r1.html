@@ -33,7 +33,7 @@
 		var info = document.body.appendChild( document.createElement( 'div' ) );
 		info.style.cssText = 'margin: 20px; position: absolute; ';
 		info.innerHTML = '<a href="" ><h1>' + document.title + '</h1></a>' +
-			'<div id=msg >Click on any of the mallet compenents...</div>' +
+			'<div id=msg >This demo loads a prepared DXF files and displays it in 3D<br>Click on any of the mallet components...</div>' +
 		'';
 
 // Heads Up
@@ -51,7 +51,7 @@
 		document.body.appendChild( renderer.domElement );
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 5000 );
-		camera.position.set( 100, 100, 100 );
+		camera.position.set( 80, 80, 80 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
 
@@ -157,7 +157,7 @@
 			intersected = intersects[ 0 ].object;
 			intersected.material.color.setHex( Math.random() * 0xffffff );
 
-			headsUp.style.left = 10 + 0.5 * window.innerWidth + mouse.x * 0.5 * window.innerWidth + 'px';
+			headsUp.style.left = 50 + 0.5 * window.innerWidth + mouse.x * 0.5 * window.innerWidth + 'px';
 			headsUp.style.top = -10 + 0.5 * window.innerHeight - mouse.y * 0.5 * window.innerHeight + 'px';
 			headsUp.style.display = '';
 
@@ -165,7 +165,6 @@
 				'Three.js id:' + intersected.id + '<br>' +
 				'UUID:' + intersected.uuid + '<br>' +
 				'Type: ' + intersected.type + '<br>' +
-
 			'';
 
 		} else {

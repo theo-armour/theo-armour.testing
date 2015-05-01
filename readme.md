@@ -9,7 +9,7 @@
 [Display WikiHouse Studio2]( http://theo-armour.github.io/theo-armour.testing/display-wikihouse-studio2/latest/index.html )  
 [Read Me]( ./index.html#./display-wikihouse-studio2/readme.md# )
 
-[Display WikiHouse Studio2]( http://theo-armour.github.io/theo-armour.testing/display-wikihouse-mallet1/display-wikihouse-mallet1-r1.html )  
+[Display WikiHouse Mallet1]( http://theo-armour.github.io/theo-armour.testing/display-wikihouse-mallet1/display-wikihouse-mallet1-r1.html )  
 
 <!--
 viewer: <http://theo-armour.github.io/theo-armour.testing/png-tms7-viewer-3d-features/r1/png-tms7-viewer-3d.html>  
