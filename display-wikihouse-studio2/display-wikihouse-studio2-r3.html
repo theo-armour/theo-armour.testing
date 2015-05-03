@@ -122,7 +122,7 @@
 		var axisHelper = new THREE.AxisHelper( 50 );
 		scene.add( axisHelper );
 		
-		var loader = new THREE.ColladaLoader();
+		loader = new THREE.ColladaLoader();
 		loader.options.convertUpAxis = true;
 		loader.load( fileName, function colladaReady( collada ) {
 

@@ -9,7 +9,7 @@
 [Display WikiHouse Studio2]( http://theo-armour.github.io/theo-armour.testing/display-wikihouse-studio2/latest/index.html )  
 [Read Me]( ./index.html#./display-wikihouse-studio2/readme.md# )
 
-[Display WikiHouse StepUp1]( http://theo-armour.github.io/theo-armour.testing/display-wikihouse-stepup1/latest/index.html ) 
+[Display WikiHouse StepUp1]( http://theo-armour.github.io/theo-armour.testing/display-wikihouse-stepup1/latest/index.html )  
 [Read Me]( ./index.html#./display-wikihouse-stepup1/readme.md# )
 
 [Display WikiHouse Mallet1]( http://theo-armour.github.io/theo-armour.testing/display-wikihouse-mallet1/latest/index.html )  

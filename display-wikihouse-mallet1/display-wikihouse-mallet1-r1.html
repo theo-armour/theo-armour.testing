@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang=en >
 <head>
-<title>display-whikihouse-mallet1-r1.html</title>
+<title>display-wikihouse-mallet1-r1.html</title>
 <meta charset=utf-8 />
 <meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' />
 </head>
@@ -34,6 +34,7 @@
 		info.style.cssText = 'margin: 20px; position: absolute; ';
 		info.innerHTML = '<a href="" ><h1>' + document.title + '</h1></a>' +
 			'<div id=msg >This demo loads a prepared DXF files and displays it in 3D<br>Click on any of the mallet components...</div>' +
+			'<div id=msg1 ></div>' +
 		'';
 
 // Heads Up
@@ -97,7 +98,12 @@
 
 	function getDXF() {
 
-		if ( xmlHttp.readyState !== 4  ) { return; }
+		if ( xmlHttp.readyState !== 4  ) { 
+
+			msg1.innerHTML += '.';
+			return; 
+
+		}
 
 		text = xmlHttp.responseText;
 		var lines = text.split(/\r\n|\n/);
@@ -128,7 +134,7 @@
 
 		}
 
-
+		msg1.innerHTML = fileName + 'loaded ';
 
 	}
 

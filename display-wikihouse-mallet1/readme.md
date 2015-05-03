@@ -1,4 +1,4 @@
-Display ikiHouse Mallet1 Read Me
+Display WikiHouse Mallet1 Read Me
 ===
 
 <span style=display:none; >[View as web page]( http://theo-armour.github.io/theo-armour.testing/index.html#./display-wikihouse-mallet1/readme.md# "view the files as apps." ) </span>  
