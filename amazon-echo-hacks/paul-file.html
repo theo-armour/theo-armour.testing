@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Accessing Amazon Echo Data with JavaScript</title>
+<link rel="stylesheet" type="text/css" href="http://analyticphysics.com/style.css">
+<style> .indent { margin-left: .5in } </style>
+</head>
+
+<body>
+
+<script>
+
+var root = 'https://pitangui.amazon.com/api/';
+var echo = new XMLHttpRequest();
+
+function getJSON(url) {
+  echo.open('GET',url,false);
+  echo.send();
+  var json = JSON.parse( echo.response );
+  var w = window.open('','_blank');
+  w.document.write( '<pre>' + JSON.stringify(json,null,'\t') + '</pre>' );
+  w.document.title = 'Amazon Echo Data';
+  w.history.pushState('','',url);
+}
+
+</script>
+
+<p>This page is an experiment in accessing the data of an Amazon Echo using plain JavaScript. This comes with some caveats:</p>
+
+<blockquote>You need to be signed into your <a href="https://echo.amazon.com" target="_blank">Amazon Echo</a> account for the unformatted links to function. Note that all links must be secure to return data.</blockquote>
+
+<blockquote>For security reasons modern browsers prevent cross-site XMLHttpRequests between remote domains without CORS enabled. The underlying JS functions in this page will not work from the remote server. The page must be saved to local storage to function completely.</blockquote>
+
+<blockquote>Some browsers, notably Firefox, do not allow cross-site XMLHttpRequests from the local domain without CORS enabled, so the underlying JS functions in this page will not work in them. Chrome can be forced to process XMLHttpRequests by disabling security with the <nobr><span class="mono">--disable-web-security</span></nobr> command-line flag, but do so at your own risk. Safari will process XMLHttpRequests originating from the local domain without modification, so that browser is being used for this experiment.</blockquote>
+
+<p>In the end it is a bit surprising that such simple code works at all, even in Safari, but that is because most of the authentication with Amazon&rsquo;s server is handled by the browser.</p>
+
+<div style="display: none">
+<h1>Contents</h1>
+<p class="indent">
+<a href="#configuration">Echo Configuration</a><br/>
+<a href="#view-data">Viewing User Data</a><br/>
+<a href="#edit-data">Editing User Data</a><br/>
+<a href="#documentation">Online Documentation</a>
+</p>
+</div>
+
+<br/><a id="configuration"/><h1>Echo Configuration</h1>
+
+<p>Device Settings:</p>
+
+<p class="indent">
+<a href="https://pitangui.amazon.com/api/devices/device" target="_blank">
+  https://pitangui.amazon.com/api/devices/device</a> &nbsp;
+  (<a href="" onclick="getJSON('https://pitangui.amazon.com/api/devices/device');return false">formatted</a>)<br/>
+<a href="https://pitangui.amazon.com/api/device-preferences" target="_blank">
+  https://pitangui.amazon.com/api/device-preferences</a> &nbsp;
+  (<a href="" onclick="getJSON('https://pitangui.amazon.com/api/device-preferences');return false">formatted</a>)<br/>
+<a href="https://pitangui.amazon.com/api/bluetooth" target="_blank">
+  https://pitangui.amazon.com/api/bluetooth</a> &nbsp;
+  (<a href="" onclick="getJSON('https://pitangui.amazon.com/api/bluetooth');return false">formatted</a>)<br/>
+<a href="https://pitangui.amazon.com/api/wake-word" target="_blank">
+  https://pitangui.amazon.com/api/wake-word</a> &nbsp;
+  (<a href="" onclick="getJSON('https://pitangui.amazon.com/api/wake-word');return false">formatted</a>)</p>
+
+<p>Customer Settings:</p>
+
+<p class="indent">
+<a href="https://pitangui.amazon.com/api/customer-status" target="_blank">
+  https://pitangui.amazon.com/api/customer-status</a> &nbsp;
+  (<a href="" onclick="getJSON('https://pitangui.amazon.com/api/customer-status');return false">formatted</a>)<br/>
+<a href="https://pitangui.amazon.com/api/authentication" target="_blank">
+  https://pitangui.amazon.com/api/authentication</a> &nbsp;
+  (<a href="" onclick="getJSON('https://pitangui.amazon.com/api/authentication');return false">formatted</a>)<br/>
+<a href="https://pitangui.amazon.com/api/notifications" target="_blank">
+  https://pitangui.amazon.com/api/notifications</a> &nbsp;
+  (<a href="" onclick="getJSON('https://pitangui.amazon.com/api/notifications');return false">formatted</a>)</p>
+
+<p>Streaming Services:</p>
+
+<p class="indent">
+<a href="https://pitangui.amazon.com/api/media/provider-capabilities" target="_blank">
+  https://pitangui.amazon.com/api/media/provider-capabilities</a> &nbsp;
+  (<a href="" onclick="getJSON('https://pitangui.amazon.com/api/media/provider-capabilities');return false">formatted</a>)<br/>
+<a href="https://pitangui.amazon.com/api/music-account-details" target="_blank">
+  https://pitangui.amazon.com/api/music-account-details</a> &nbsp;
+  (<a href="" onclick="getJSON('https://pitangui.amazon.com/api/music-account-details');return false">formatted</a>)<br/>
+<a href="https://pitangui.amazon.com/api/third-party" target="_blank">
+  https://pitangui.amazon.com/api/third-party</a> &nbsp;
+  (<a href="" onclick="getJSON('https://pitangui.amazon.com/api/third-party');return false">formatted</a>)</p>
+
+<p>Networked Hardware:</p>
+
+<p class="indent">
+<a href="https://pitangui.amazon.com/api/phoenix" target="_blank">
+  https://pitangui.amazon.com/api/phoenix</a> (malformed JSON response)<br/>
+<a href="https://pitangui.amazon.com/api/phoenix/group?size=100" target="_blank">
+  https://pitangui.amazon.com/api/phoenix/group?size=100</a> &nbsp;
+  (<a href="" onclick="getJSON('https://pitangui.amazon.com/api/phoenix/group?size=100');return false">formatted</a>)<br/>
+<a href="https://pitangui.amazon.com/api/eon/accounts" target="_blank">
+  https://pitangui.amazon.com/api/eon/accounts</a> &nbsp;
+  (<a href="" onclick="getJSON('https://pitangui.amazon.com/api/eon/accounts');return false">formatted</a>)</p>
+
+<br/><h1 id="view-data">Viewing User Data</h1>
+
+<p>Every recognized voice command is stored as a card. The entire set of active cards can be viewed with this link:</p>
+
+<p class="indent">
+<a href="https://pitangui.amazon.com/api/cards" target="_blank">
+  https://pitangui.amazon.com/api/cards</a> &nbsp;
+  (<a href="" onclick="getJSON('https://pitangui.amazon.com/api/cards');return false">formatted</a>)</p>
+
+<p>Cards do not appear to persist in the listing more than a few days, as can be seen by scrolling to the oldest. Cards do remain on the server after removal from the current listing and can be accessed individually.</p>
+
+<p>Activate the button for the current
+<input onclick="totalCards()" type="button" value="Number of Cards"/></p>
+
+<script>
+
+function totalCards() {
+  var url = root + 'cards';
+  echo.open('GET',url,false);
+  echo.send();
+  var json = JSON.parse( echo.response );
+  alert( 'Total Cards: ' + json.cards.length );
+}
+
+</script>
+
+<p>Individual cards are stored in a subdirectory labeled by the <span class="mono">id</span> field and can be accessed after escaping the pound sign in that field to its hex value.</p>
+
+<p>Activate the button for a scrollable
+<input onclick="cardList()" type="button" value="Card List"/></p>
+
+<div id='cards' class="indent" style="height: .5in; overflow: scroll">
+  <i>card list will go here</i></div>
+
+<script>
+
+function cardList() {
+  var url = root + 'cards';
+  echo.open('GET',url,false);
+  echo.send();
+  var json = JSON.parse( echo.response );
+  var s = '';
+  for ( var i=0 ; i < json.cards.length ; i++ ) {
+    s += '<a href="" onclick="getJSON(\'' + root + 'cards/' + json.cards[i].id.replace('#','%23')
+         + '\');return false">' + json.cards[i].descriptiveText + '</a><br/>';
+  }
+  document.getElementById('cards').innerHTML = s;
+}
+
+</script>
+
+<p>Cards contain links to the audio data stored on Amazon&rsquo;s server, which remains there indefinitely. All stored audio can be removed by visiting <a href="https://www.amazon.com/myx">www.amazon.com/myx</a> and choosing Devices > Manage voice recordings.</p>
+
+<p>Activate the button for a scrollable list of links to
+<input onclick="audioLinks()" type="button" value="Stored Audio"/></p>
+
+<script>
+
+function audioLinks() {
+  var url = root + 'cards';
+  echo.open('GET',url,false);
+  echo.send();
+  var json = JSON.parse( echo.response );
+  var s = '';
+  for ( var i=0 ; i < json.cards.length ; i++ ) {
+    if ( json.cards[i].playbackAudioAction ) {
+      var audio = json.cards[i].playbackAudioAction.url;
+      s += '<a href="' + root.substring(0, root.length-5) + audio
+           + '" target="_blank">' + json.cards[i].playbackAudioAction.mainText + '</a><br/>';
+    }
+  }
+  document.getElementById('audio').innerHTML = s;
+}
+
+</script>
+
+<div id='audio' class="indent" style="height: .5in; overflow: scroll">
+  <i>stored audio list will go here</i></div>
+
+<p>Parallel to cards is a directory of activities, but the link</p>
+
+<p class="indent">
+<a href="https://pitangui.amazon.com/api/activities" target="_blank">
+  https://pitangui.amazon.com/api/activities</a></p>
+
+<p>does not provide a JSON response. Individual activities can be accessed in this directory in the same ways as cards and with the same <span class="mono">id</span>.</p>
+
+<br/><p>To-dos are stored in a separate directory and are of two types: <span class="mono">TASK</span> and <span class="mono">SHOPPING_ITEM</span>. Retrieving them requires the size variable which has been set arbitrarily high:</p>
+
+<p class="indent">
+<a href="https://pitangui.amazon.com/api/todos?type=TASK&size=100&complete=true|false" target="_blank">
+  https://pitangui.amazon.com/api/todos?type=TASK&size=100&complete=true|false</a><br/>
+  &nbsp; &nbsp; &nbsp;
+  (<a href="" onclick="getJSON('https://pitangui.amazon.com/api/todos?type=TASK&size=100&complete=true|false');
+    return false">formatted</a>)<br/>
+<a href="https://pitangui.amazon.com/api/todos?type=SHOPPING_ITEM&size=100&complete=true|false" target="_blank">
+  https://pitangui.amazon.com/api/todos?type=SHOPPING_ITEM&size=100&complete=true|false</a><br/>
+  &nbsp; &nbsp; &nbsp;
+  (<a href="" onclick="getJSON('https://pitangui.amazon.com/api/todos?type=SHOPPING_ITEM&size=100&complete=true|false');
+    return false">formatted</a>)</p>
+
+<p>Individual to-do items are stored in a subdirectory labeled by the part of the <span class="mono">itemId</span> after the pound sign. This value is the same as the <span class="mono">todoId</span> on the original audio card.</p>
+
+<p>Activate the button for a
+<input onclick="taskList()" type="button" value="Task List"/></p>
+
+<div id='tasks' class="indent"><i>task list will go here</i></div>
+
+<script>
+
+function taskList() {
+  var url = root + 'todos?type=TASK&size=100&complete=true|false';
+  echo.open('GET',url,false);
+  echo.send();
+  var json = JSON.parse( echo.response );
+  var s = '';
+  for ( var i=0 ; i < json.values.length ; i++ ) {
+    var todo = json.values[i].itemId.split('#')[1];
+    s += '<a href=""';
+    if ( json.values[i].complete == true ) s += ' style="text-decoration: line-through"';
+    s += ' onclick="getJSON(\'' + root + 'todos/' + todo
+         + '\');return false">' + json.values[i].text + '</a><br/>';
+  }
+  document.getElementById('tasks').innerHTML = s;
+}
+
+</script>
+
+<p>Activate the button for a
+<input onclick="shoppingList()" type="button" value="Shopping List"/></p>
+
+<div id='shopping' class="indent"><i>shopping list will go here</i></div>
+
+<script>
+
+function shoppingList() {
+  var url = root + 'todos?type=SHOPPING_ITEM&size=100&complete=true|false';
+  echo.open('GET',url,false);
+  echo.send();
+  var json = JSON.parse( echo.response );
+  var s = '';
+  for ( var i=0 ; i < json.values.length ; i++ ) {
+    var todo = json.values[i].itemId.split('#')[1];
+    s += '<a href=""';
+    if ( json.values[i].complete == true ) s += ' style="text-decoration: line-through"';
+    s += ' onclick="getJSON(\'' + root + 'todos/' + todo
+         + '\');return false">' + json.values[i].text + '</a><br/>';
+  }
+  document.getElementById('shopping').innerHTML = s;
+}
+
+</script>
+
+<p>The JavaScript source includes a third task type, <span class="mono">MESSAGEBOARD_POST</span>, that is not yet implemented.</p>
+
+<br/><h1 id="edit-data">Editing User Data</h1>
+
+<p>Editing data can be done with an authenticated <span class="mono">PUT</span> to Amazon&rsquo;s server that requires the value stored in their <span class="mono">csrf</span> cookie. Since JavaScript does not allow access to cookies for other domains, that numerical value must be found using your browser&rsquo;s website resources inspector and entered in the following input:</p>
+
+<p class="indent">Value in the <span class="mono">csrf</span> cookie:&nbsp;&nbsp;
+<input type="text" id="csrf" style="width: 1.5in"/>
+
+<p>Once that value is entered, activate either button for an editable
+<input onclick="getList('TASK')" type="button" value="Task List"/>
+or
+<input onclick="getList('SHOPPING_ITEM')" type="button" value="Shopping List"/>
+</p>
+
+<div id='editable' class="indent"><i>editable list will go here</i></div>
+
+<script>
+
+function getList( type ) {
+  var url = root + 'todos?type=' + type + '&size=100&complete=true|false';
+  echo.open('GET',url,false);
+  echo.send();
+  var json = JSON.parse( echo.response );
+  var s = '<table><tr><td style="width: 3.5in">&nbsp;</td>'
+           + '<td>complete</td><td>deleted</td><td/></tr>';
+  for ( var i=0 ; i < json.values.length ; i++ ) {
+    var todo = json.values[i].itemId.split('#')[1];
+    s += '<tr><td><input type="text" id="text' + i
+         + '" value="' + json.values[i].text + '" style="width: 3in"/></td>'
+         + '<td style="text-align: center"><input type="checkbox" id="complete' + i + '"';
+    if ( json.values[i].complete == true ) s += ' checked="checked"';
+    s += '"/></td><td style="text-align: center"><input type="checkbox" id="deleted' + i + '"';
+    if ( json.values[i].deleted == true ) s += ' checked="checked"';
+    s += '"/></td><td><input type="button" value="save"'
+         + ' onclick="putData('+ i + ',\'' + todo + '\')"/></td></tr>';
+  }
+  document.getElementById('editable').innerHTML = s + '</table>';
+}
+
+function putData( i, todo ) {
+  url = root + 'todos/' + todo;
+  echo.open('GET',url,false);
+  echo.send();
+  json = JSON.parse( echo.response );
+
+  json.text = document.getElementById('text' + i).value;
+  json.complete = document.getElementById('complete' + i).checked;
+  json.deleted = document.getElementById('deleted' + i).checked;
+
+  echo.open('PUT',url,false);
+  echo.setRequestHeader('csrf', document.getElementById('csrf').value);
+  echo.send( JSON.stringify(json) );
+
+  getList( json.type );
+}
+
+</script>
+
+<p>The only fields that can currently be changed are <span class="mono">complete</span>, <span class="mono">deleted</span> and <span class="mono">text</span>, which are the fields accessible through the Echo web interface. Putting data on the server must be done with the entire JSON response, not individual fields one at a time.</p>
+
+<p>Deleted tasks and shopping items remain on Amazon&rsquo;s server after deletion and can still be accessed as individual items. They will not appear in to-do lists even after adding <span class="mono">deleted=true|false</span> to the query string.</p>
+
+<br/><h1 id="documentation">Online Documentation</h1>
+
+<p>Official API (currently accessible only by invitation):</p>
+
+<p class="indent">
+<a href="https://developer.amazon.com/public/solutions/devices/echo/alexa-app-kit">https://developer.amazon.com/public/solutions/devices/echo/alexa-app-kit</a></p>
+
+<p>Unofficial APIs:</p>
+
+<p class="indent">
+<a href="http://www.piettes.com/the-amazon-echo-api/">http://www.piettes.com/the-amazon-echo-api/</a>
+</p>
+
+<p>Online forums:</p>
+
+<p class="indent">
+<a href="http://www.piettes.com/echo/">http://www.piettes.com/echo/</a>
+</p>
+
+<br/><p><i>Uploaded 2015.04.27 &mdash; Updated 2015.04.30</i></p>
+
+</body>
+</html>

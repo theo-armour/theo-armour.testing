@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang=en >
+<head>
+<title>amazon-echo-hacks.html</title>
+<meta charset=utf-8 />
+</head>
+<body>
+<script>
+
+	document.body.style.cssText = ' font: bold 12pt monospace; ';
+
+	var info = document.body.appendChild( document.createElement( 'div' ) );
+	info.innerHTML = '<a href="" ><h1>' + document.title + '</h1></a>' +
+		'<p><a href="https://pitangui.amazon.com/api/devices/device" target="_blank">device</a></p>' +
+		'<div id=msg1 ></div>' +
+
+	'';
+
+
+	var fileName = 'https://pitangui.amazon.com/api/devices/device';
+	var xmlHttp;
+
+	requestFile();
+
+	function requestFile() {
+
+		xmlHttp = new XMLHttpRequest();
+		xmlHttp.open( 'GET', fileName, true );
+		xmlHttp.crossOrigin = 'anonymous';
+		xmlHttp.onreadystatechange = callback;
+		xmlHttp.send( null );
+
+	}
+
+	function callback() {
+
+		if ( xmlHttp.readyState != 4  ) { return; }
+		text = JSON.parse( xmlHttp.responseText );
+//		text = xmlHttp.responseText;
+//		var lines = text.split(/\r\n|\n/);
+
+		console.log( text );
+
+	}
+</script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang=en >
 <head>
-<title>Display WikiHouse Studio2 R3</title>
+<title>Display WikiHouse Studio2 R3a</title>
 <meta charset=utf-8 />
 <meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' />
 </head>
@@ -38,7 +38,7 @@
 			'<a id=i href=http://theo-armour.github.io/theo-armour.testing/#./display-wikihouse-studio2/readme.md# >&#x24D8;</a>' +
 			'</h1>' +
 			'<p>Exploded View<br><input type=range id=inpStretch min=10 max=100 value=10 step=5 onchange=setExplodeStructure(); /></p>' +
-			'<p>Click on any component to view some of its details</p>' +
+			'<p>Click on any component to view some of its details<br>- Will eventually link to data from a Google Apps spreadsheet</p>' +
 			'<div id=msg></div>' +
 		'';
 
@@ -157,8 +157,8 @@
 		raycaster = new THREE.Raycaster();
 		mouse = new THREE.Vector2();
 
-		document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-		document.addEventListener( 'touchstart', onDocumentTouchStart, false ); // for mobile
+		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
+		renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false ); // for mobile
 
 		setRandomGradient();
 

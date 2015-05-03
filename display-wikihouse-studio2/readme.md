@@ -21,16 +21,16 @@ Latest release: [Display WikiHouse Studio2]( http://theo-armour.github.io/theo-a
 
 ### Features
 
-* Enables real-time zoom, pan and rotate of the desig
-* Views have have shade and shadow
+* Enables real-time zoom, pan and rotate of the design
+* Views have shade and shadow
 * Slider bar controls exploded view
+* Highlight and heads-up display of clicked-on object properties
+	* Will eventually display link to spec clause, IFC, bom etc
 * Background is three circular gradients with random colors
- 
+
 
 ### Road Map
 
-* Highlight and heads-up display of clicked-on object properties
-	* display link to spec clause, bom etc
 * Obtain access to data for individual components
 	* rebuild as JSN/STL files
 
@@ -57,3 +57,13 @@ or a CC-BY-SA 4.0 license - as appropriate.
 ### WikiHouse Commons
 The WikiHouse Commons are where all the files of work in development are shared by teams within the community. 
 All design information shared in the WikiHouse commons is shared under a CC-BY-SA 4.0 license, and according to the WikiHouse community terms & conditions.
+
+
+
+### Change Log
+
+2015-05-02 ~ Theo
+
+* R3a ~ fixes issue with explode not working with heads-up display
+
+
