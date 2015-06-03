@@ -5,6 +5,8 @@
 
 [Source code on GitHub]( https://github.com/theo-armour/theo-armour.testing )
 
+[OpenDesk Rotational Stool R1]( http://theo-armour.github.io/theo-armour.testing/display-open-desk-rotational-stool/build-open-desk-rotational-stool-r1.html )  
+[Read Me]( http://theo-armour.github.io/theo-armour.testing/display-open-desk-rotational-stool/ )
 
 [Display WikiHouse Studio2]( http://theo-armour.github.io/theo-armour.testing/display-wikihouse-studio2/latest/index.html )  
 [Read Me]( ./index.html#./display-wikihouse-studio2/readme.md# )

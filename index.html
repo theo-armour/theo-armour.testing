@@ -1,74 +1,47 @@
 <!doctype html>
 <html lang=en >
 <head>
-<title>Jaanga Star Spotter</title>
+<title></title>
 <meta charset=utf-8 />
+<meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' />
 </head>
 <body>
-<script src=http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js ></script>
 <script>
-// Let's make a read me file written in MarkDown be viewable as HTML
 
-	var xmlHttp;
-	var converter = new Showdown.converter();
-
-	init();
+	var script = document.body.appendChild( document.createElement( 'script' ) );
+	script.onload = init;
+	script.src = 'http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js'; 
 
 	function init() {
 
-		document.body.style.cssText = ' font: bold 12pt monospace; left: 0; margin: 0 auto; position: absolute; right: 0; max-width:900px;';
+		document.body.style.cssText = ' font: bold 12pt monospace; left: 0; margin: 0 auto; max-width: 900px; position: absolute; right: 0; ';
 
 		var info = document.body.appendChild( document.createElement( 'div' ) );
 
+		var fileName = location.hash ? location.hash.split( '#' )[1] : 'readme.md';
+		document.title = document.title ? document.title : fileName;
 
-
-		if ( !location.hash ) {
-
-			var fileName = 'readme.md';
-
-		} else {
-
-			fileName = location.hash.split( '#' )[1];
-
-		}
-
-		window.addEventListener ( 'hashchange', onHashChange, false );
-
-		requestFile( fileName );
-
-	}
-
-
-
-	function requestFile( fileName ) {
-
-		xmlHttp = new XMLHttpRequest();
+		var xmlHttp = new XMLHttpRequest();
 		xmlHttp.open( 'GET', fileName, true );
-		xmlHttp.onreadystatechange = callback;
+		xmlHttp.onreadystatechange = function() {
+
+			info.innerHTML = xmlHttp.readyState === 4  ? new Showdown.converter().makeHtml( xmlHttp.responseText ) : '';
+
+		};
+
 		xmlHttp.send( null );
 
 	}
 
-	function callback() {
+/*
 
-		if ( xmlHttp.readyState != 4  ) { return; }
+Visible only on GitHub
+<span style=display:none; >[View as web page]( http://xxxxx.github.io/xxxxx/ "View file as a web page." ) </span>  
 
-		var text = xmlHttp.responseText;
-		text = converter.makeHtml( text );
-		info.innerHTML = text;
+Visible only on the web page
+<input type=button value='View file as source code on GitHub' onclick=window.location.href='http://github.com/xxxxx/xxxxx/tree/gh-pages/'; />
 
-
-	}
-
-	function onHashChange() {
-
-		var hashes = location.hash.split ( '#' );
-
-		if ( hashes.length < 2 ) { return; } 
-
-		requestFile( hashes[ 1 ] );
-
-	}
+*/
 
 </script>
 </body>
