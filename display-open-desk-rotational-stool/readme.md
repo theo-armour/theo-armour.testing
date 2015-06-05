@@ -41,14 +41,18 @@ Designers
 * View assembled and disassembled
 	* With tweening
 	* Reset components individually or collectively
-* Exploded View
+* Exploded view
 * Output to printable SVG file
 	* May be used to build scale models
 
 ### Road Map
 
-* Vary width and length
+* More parameters
+	* Vary width and length parameters
 * Load cutout holes from SVG files
+* Export/import DXF files
+	* Enable more design possibilities for the design of the legs
+* Improve nesting functions
 * Attractive visualizations
 	* Lights, shade and shadow
 	* Skybox and terrain
