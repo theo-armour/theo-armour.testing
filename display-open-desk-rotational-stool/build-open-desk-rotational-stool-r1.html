@@ -51,7 +51,7 @@
 		'';
 
 		info = document.body.appendChild( document.createElement( 'div' ) );
-		info.style.cssText = 'margin: 0 10px; max-width: 250px; position: absolute; ';
+		info.style.cssText = 'background-color: white; margin: 0 5px; max-width: 220px; opacity: 0.7; position: absolute; ';
 		info.innerHTML = '<h3><a href="" >' + document.title + '</a> - ' +
 			'<a id=i href=http://theo-armour.github.io/theo-armour.testing/display-open-desk-rotational-stool/ >&#x24D8;</a>' +
 			'</h3>' +
@@ -60,12 +60,12 @@
 			'<div><small>Touch any component</small></div>' +
 			'<div><button onclick=returnAllToStartTween(); >Disassemble</button> ' +
 			'<button onclick=assembleQuicklyTween(); >Assemble</button></div>' +
-			'<p><input type=range id=inpStretch min=0 max=50 step=1 value=0 onchange=setExplodeStructure(); /> Explode</p>' +
+			'<p><input type=range id=inpStretch min=0 max=50 step=1 value=0 onchange=setExplodeStructure(); />Explode</p>' +
 			'<hr>' +
-			'<p><input type=range id=inpThickness min=5 max=39 step=1 value=' + thickness + ' onchange=buildStool1(); /> Thickness</p>' +
-			'<p><input type=range id=inpWidth min=210 max=315 step=1 value=' + width + ' onchange=buildStool1(); /> Width</p>' +
-			'<p><input type=range id=inpTab min=130 max=180 step=1 value=' + tab + ' onchange=buildStool1(); /> Tab</p>' +
-			'<p><input type=range id=inpHeight min=200 max=500 step=1 value=' + height + ' onchange=buildStool1(); /> Height</p>' +
+			'<p><input type=range id=inpThickness min=5 max=39 step=1 value=' + thickness + ' onchange=buildStool1(); />Thickness</p>' +
+			'<p><input type=range id=inpWidth min=210 max=315 step=1 value=' + width + ' onchange=buildStool1(); />Width</p>' +
+			'<p><input type=range id=inpTab min=130 max=180 step=1 value=' + tab + ' onchange=buildStool1(); />Tab</p>' +
+			'<p><input type=range id=inpHeight min=200 max=500 step=1 value=' + height + ' onchange=buildStool1(); />Height</p>' +
 			'<div><button onclick=printSVG(); >Print SVG</button> ' +
 			'<div id=msg1 ></div>' +
 		'';
