@@ -46,6 +46,7 @@
 
 		css = document.head.appendChild( document.createElement('style') );
 		css.innerHTML ='body { font: 600 12pt monospace; margin: 0; overflow: hidden; }' +
+			'h3 { margin: 0; }' +
 			'#i {text-decoration: none; }' +
 		'';
 
@@ -57,14 +58,14 @@
 //			'<p>Building the Step Up using parameterized functions for each component</p>' +
 //			'<p>2015-05-04 ~ 2015-05-13 ~ WIP with many issues</p>' +
 			'<div><small>Touch any component</small></div>' +
-			'<div><button onclick=returnAllToStartTween(); >Return all to start</button> ' +
-			'<button onclick=assembleQuicklyTween(); >Assemble Quickly</button></div>' +
-			'<p><input type=range id=inpStretch min=0 max=50 step=1 value=0 onclick=setExplodeStructure(); /> Explode</p>' +
+			'<div><button onclick=returnAllToStartTween(); >Disassemble</button> ' +
+			'<button onclick=assembleQuicklyTween(); >Assemble</button></div>' +
+			'<p><input type=range id=inpStretch min=0 max=50 step=1 value=0 onchange=setExplodeStructure(); /> Explode</p>' +
 			'<hr>' +
-			'<p><input type=range id=inpThickness min=5 max=39 step=1 value=' + thickness + ' onclick=buildStool1(); /> Thickness</p>' +
-			'<p><input type=range id=inpWidth min=210 max=315 step=1 value=' + width + ' onclick=buildStool1(); /> Width</p>' +
-			'<p><input type=range id=inpTab min=130 max=180 step=1 value=' + tab + ' onclick=buildStool1(); /> Tab</p>' +
-			'<p><input type=range id=inpHeight min=200 max=500 step=1 value=' + height + ' onclick=buildStool1(); /> Height</p>' +
+			'<p><input type=range id=inpThickness min=5 max=39 step=1 value=' + thickness + ' onchange=buildStool1(); /> Thickness</p>' +
+			'<p><input type=range id=inpWidth min=210 max=315 step=1 value=' + width + ' onchange=buildStool1(); /> Width</p>' +
+			'<p><input type=range id=inpTab min=130 max=180 step=1 value=' + tab + ' onchange=buildStool1(); /> Tab</p>' +
+			'<p><input type=range id=inpHeight min=200 max=500 step=1 value=' + height + ' onchange=buildStool1(); /> Height</p>' +
 			'<div><button onclick=printSVG(); >Print SVG</button> ' +
 			'<div id=msg1 ></div>' +
 		'';
@@ -155,7 +156,7 @@
 
 		seat1.position.set( thickness, - 2 * width - 20, 0 );
 		seat1.userData.startPosition = seat1.position.clone();
-		seat1.userData.endPosition = v( thickness, height, 0 );
+		seat1.userData.endPosition = v( thickness, height, 100 );
 
 		seat1.rotation.set( 0, 0, 0 );
 		seat1.userData.startRotation = seat1.rotation.clone();;
@@ -169,7 +170,7 @@
 
 		leg1.position.set( height, - width, 0 );
 		leg1.userData.startPosition = leg1.position.clone();
-		leg1.userData.endPosition = v( 0, 0, 0 );
+		leg1.userData.endPosition = v( 0, 0, 100 );
 
 		leg1.rotation.set( 0, 0, pi / 2 );
 		leg1.userData.startRotation = leg1.rotation.clone();
@@ -187,7 +188,7 @@
 
 		leg2.position.set( 0, 0.5 * width, 0 );
 		leg2.userData.startPosition = leg2.position.clone();
-		leg2.userData.endPosition = v( 0, 0, width );
+		leg2.userData.endPosition = v( 0, 0, 100 + width );
 
 		leg2.rotation.set( 0, 0, - pi / 2 );
 		leg2.userData.startRotation = leg2.rotation.clone();
@@ -205,7 +206,7 @@
 
 		leg3.position.set( height, 0.5 * ( width + 20 ), 0 );
 		leg3.userData.startPosition = leg3.position.clone();
-		leg3.userData.endPosition = v( width, 0, width );
+		leg3.userData.endPosition = v( width, 0, 100 + width );
 
 		leg3.rotation.set( 0, 0, pi / 2 );
 		leg3.userData.startRotation = leg3.rotation.clone();
@@ -223,7 +224,7 @@
 
 		leg4.position.set( 0, 2 * width, 0 );
 		leg4.userData.startPosition = leg4.position.clone();
-		leg4.userData.endPosition = v( width, 0, 0 );
+		leg4.userData.endPosition = v( width, 0, 100 );
 
 		leg4.rotation.set( 0, 0, - pi / 2 );
 		leg4.userData.startRotation = leg4.rotation.clone();
