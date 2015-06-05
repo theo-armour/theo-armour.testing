@@ -21,16 +21,14 @@
 	var cutDepth = 6;
 	var cutWidth = 10;
 
-//	var face;
-//	var morticeWidth = 26;
-//	var upstand = 100;
-//	var tenon = 12;
-
 	var stool1;
 	var stool2;
 	var edges;
 	var originMarker;
 	var particleMaterial;
+
+	var seatPath;
+	var legPath;
 
 	var components = [];
 	var pi = Math.PI;
@@ -54,18 +52,20 @@
 		info = document.body.appendChild( document.createElement( 'div' ) );
 		info.style.cssText = 'margin: 0 10px; max-width: 250px; position: absolute; ';
 		info.innerHTML = '<h3><a href="" >' + document.title + '</a> - ' +
-			'<a id=i href=http://theo-armour.github.io/theo-armour.testing/build-open-desk-rotational-stool/ >&#x24D8;</a>' +
+			'<a id=i href=http://theo-armour.github.io/theo-armour.testing/display-open-desk-rotational-stool/ >&#x24D8;</a>' +
 			'</h3>' +
 //			'<p>Building the Step Up using parameterized functions for each component</p>' +
 //			'<p>2015-05-04 ~ 2015-05-13 ~ WIP with many issues</p>' +
 			'<div><small>Touch any component</small></div>' +
 			'<div><button onclick=returnAllToStartTween(); >Return all to start</button> ' +
 			'<button onclick=assembleQuicklyTween(); >Assemble Quickly</button></div>' +
+			'<p><input type=range id=inpStretch min=0 max=50 step=1 value=0 onclick=setExplodeStructure(); /> Explode</p>' +
+			'<hr>' +
 			'<p><input type=range id=inpThickness min=5 max=39 step=1 value=' + thickness + ' onclick=buildStool1(); /> Thickness</p>' +
 			'<p><input type=range id=inpWidth min=210 max=315 step=1 value=' + width + ' onclick=buildStool1(); /> Width</p>' +
 			'<p><input type=range id=inpTab min=130 max=180 step=1 value=' + tab + ' onclick=buildStool1(); /> Tab</p>' +
 			'<p><input type=range id=inpHeight min=200 max=500 step=1 value=' + height + ' onclick=buildStool1(); /> Height</p>' +
-			'<p><input type=range id=inpStretch min=0 max=50 step=1 value=0 onclick=setExplodeStructure(); /> Explode</p>' +
+			'<div><button onclick=printSVG(); >Print SVG</button> ' +
 			'<div id=msg1 ></div>' +
 		'';
 
@@ -98,7 +98,6 @@
 // axes
 		var axisHelper = new THREE.AxisHelper( 1000 );
 		scene.add( axisHelper );
-
 
 // Origin Marker
 		geometry = new THREE.SphereGeometry( 5 );
@@ -140,10 +139,10 @@
 
 		components = [];
 
-		width = parseFloat( inpWidth.value );
-		thickness = parseFloat( inpThickness.value );
-		tab = parseFloat( inpTab.value );
-		height = parseFloat( inpHeight.value );
+		inpWidth.title = width = parseFloat( inpWidth.value );
+		inpThickness.title = thickness = parseFloat( inpThickness.value );
+		inpTab.title = tab = parseFloat( inpTab.value );
+		inpHeight.title = height = parseFloat( inpHeight.value );
 
 		stool1 = new THREE.Object3D();
 		edges = new THREE.Object3D();
@@ -153,7 +152,6 @@
 //		seat1.position.set( thickness, height, 0 );
 //		seat1.rotation.x = pi / 2;
 //		seat1.add( originMarker.clone() );
-
 
 		seat1.position.set( thickness, - 2 * width - 20, 0 );
 		seat1.userData.startPosition = seat1.position.clone();
@@ -246,13 +244,14 @@
 
 		var mid = width - tab - thickness;
 
-		var path = [ mid, height - tab - cutWidth, width - mid - thickness, tab - mid,
+		legPath = [ mid, height - tab - cutWidth, width - mid - thickness, tab - mid,
 			-cutDepth, cutWidth, thickness + cutDepth, mid, // max x and y
-			-tab, - thickness - cutDepth, - cutWidth, cutDepth, - mid + cutWidth, -mid + thickness + cutWidth, cutDepth, -cutWidth, -thickness - cutDepth
+			-tab, - thickness - cutDepth, - cutWidth, cutDepth, - mid + cutWidth, -mid + thickness + cutWidth, cutDepth,
+			-cutWidth, -thickness - cutDepth
 
 		];
 
-		var boundary = buildVerticesBySingles( path );
+		var boundary = buildVerticesBySingles( legPath );
 
 		leg = drawPolyline( boundary, 0 );
 
@@ -267,12 +266,12 @@
 
 		var mid = width - tab - thickness;
 
-		var path = [ mid, thickness + cutDepth, cutWidth, -cutDepth, tab - cutWidth, mid, -thickness - cutDepth, cutWidth, cutDepth, tab - cutWidth,
+		seatPath = [ mid, thickness + cutDepth, cutWidth, -cutDepth, tab - cutWidth, mid, -thickness - cutDepth, cutWidth, cutDepth, tab - cutWidth,
 			-mid, -thickness - cutDepth, - cutWidth, cutDepth, -tab + cutWidth, -mid, thickness + cutDepth, -cutWidth, -cutDepth
 
 		];
 
-		var boundary = buildVerticesBySingles( path );
+		var boundary = buildVerticesBySingles( seatPath );
 
 		holes = [];
 		holes.push( drawCenterHole(  { x: mid, y: ( mid + thickness ) } ) );
@@ -280,7 +279,7 @@
 //		seat.add( drawPolyline( boundary, { holes: holes } ) );
 //		seat.add( originMarker.clone() );
 
-		seat  = drawPolyline( boundary, { holes: holes } );
+		seat = drawPolyline( boundary, { holes: holes } );
 		return seat;
 
 
@@ -382,6 +381,66 @@
 		edges.add( edge );
 
 		return mesh;
+
+	}
+
+	function printSVG() {
+
+		var x = 0;
+		var y = 0;
+		var offsetX = 0
+		vertices = '' + offsetX + ',0 ';
+
+		for ( var i = 0; i < seatPath.length; ) {
+
+			x += seatPath[ i++ ];
+			vertices += '' + ( offsetX + x ) + ',' + y + ' ';
+
+			y += seatPath[ i++ ];
+			vertices += '' + ( offsetX + x ) + ',' + y + ' ';
+
+		}
+
+		vertices += '' + offsetX + ',0 ';
+
+
+		x = 0;
+		y = 0;
+		var offsetX = 0;
+		var offsetY = 0;
+
+		vertices2 = '' + offsetX + ',' + offsetY + ' ';
+
+		for ( var i = 0; i < legPath.length; ) {
+
+			x += legPath[ i++ ];
+			vertices2 += '' + ( offsetX + x ) + ',' + ( offsetY + y ) + ' ';
+
+			y += legPath[ i++ ];
+			vertices2 += '' + ( offsetX + x ) + ',' + ( offsetY +  y ) + ' ';
+
+		}
+
+		vertices2 += '' + offsetX + ',' + offsetY + '';
+
+		var data =
+			'<svg width=660 height=800 >' +
+				'<rect x=45 y=45 width=450 height=450 stroke=black stroke-width=0.5 fill=white />' +
+//				'<rect width=675 height=900 stroke=black stroke-width=0.5 fill=white fill-opacity=0.0 />' +
+			'</svg>';
+
+		var data =
+			'<svg width=650 height=800 >' +
+				'<polygon transform="translate(390,0)" points="' + vertices + '" stroke=black stroke-width=0.5 fill=white fill-opacity=0.0 />' +
+				'<polygon transform="translate(360,0) rotate(90)" points="' + vertices2 + '" stroke=black stroke-width=0.5 fill=white fill-opacity=0.0 />' +
+				'<polygon transform="translate(0,350) rotate(-90)" points="' + vertices2 + '" stroke=black stroke-width=0.5 fill=white fill-opacity=0.0 />' +
+				'<polygon transform="translate( 360, 380) rotate(90)" points="' + vertices2 + '" stroke=black stroke-width=0.5 fill=white fill-opacity=0.0 />' +
+				'<polygon transform="translate( 0,750) rotate(-90)" points="' + vertices2 + '" stroke=black stroke-width=0.5 fill=white fill-opacity=0.0 />' +
+
+			'</svg>';
+
+
+		window.open( 'data:text/html,' + encodeURIComponent( data ) );
 
 	}
 
