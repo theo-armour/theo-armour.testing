@@ -37,13 +37,15 @@ Designers
 
 * Fully parameterized
 	* With real-time updates
-* Zoom and and rotate in 3D
+* Zoom, pan and rotate in 3D
 * View assembled and disassembled
 	* With tweening
 	* Reset components individually or collectively
 * Exploded view
 * Output to printable SVG file
 	* May be used to build scale models
+* Displays meta-data for each component clicked
+* Works reasonably well on a recent mobile device
 
 ### Road Map
 
