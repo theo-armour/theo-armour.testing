@@ -6,6 +6,8 @@ Opendesk has a global network of makers and a collection of furniture by a range
 OpenDesk Half Sheet Table
 ===
 
+Latest release: [OpenDesk Half Sheet Table R2](http://theo-armour.github.io/theo-armour.testing/opendesk-half-sheet-table/opendesk-half-sheet-table-r2.html )
+
 <span style=display:none; >[View as web page]( http://theo-armour.github.io/theo-armour.testing/opendesk-half-sheet-table/ "View file as a web page." ) </span>  
 
 
@@ -19,7 +21,6 @@ in November 2014.
 Of the many OpenDesk designs, this one has perhaps the most complex cutouts. 
 The cutouts help make the design look and feel as one of the lightest, most airy designs in the range.
 
-Latest release: [OpenDesk Half Sheet Table R2](http://theo-armour.github.io/theo-armour.testing/opendesk-half-sheet-table/opendesk-half-sheet-table-r2.html )
 
 <input type=button value='View file as source code on GitHub' onclick=window.location.href='https://github.com/theo-armour/theo-armour.testing/tree/gh-pages/opendesk-half-sheet-table/'; />
 
