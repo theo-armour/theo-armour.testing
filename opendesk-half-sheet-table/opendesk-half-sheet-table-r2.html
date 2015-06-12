@@ -34,11 +34,15 @@
 	function init() {
 
 		css = document.head.appendChild( document.createElement('style') );
-		css.innerHTML ='body { font: 600 12pt monospace; margin: 0; overflow: hidden; }' ;
+		css.innerHTML ='body { font: 600 12pt monospace; margin: 0; overflow: hidden; }' +
+			'#i {text-decoration: none; }' +
+		'';
 
 		info = document.body.appendChild( document.createElement( 'div' ) );
-		info.style.cssText = 'margin: 0 20px; max-width: 250px; position: absolute; ';
-		info.innerHTML = '<a href="" ><h3>' + document.title + '</h3></a>' +
+		info.style.cssText = ' margin: 0 10px; max-width: 250px; position: absolute; ';
+		info.innerHTML = '<h3 style=margin:0; ><a href="" >' + document.title + '</a> - ' +
+			'<a id=i href=http://the-armour.github.io/theo-armour.testing/opendesk-half-sheet-table/ >&#x24D8;</a>' +
+			'</h3>' +
 			'<p><input type=range id=inpSides min=1 max=20 step=1 value=' + sides + ' onmousemove=drawTable(); /> Sides</p>' +
 			'<p><input type=range id=inpRadius min=200 max=600 step=5 value=' + radius + ' onmousemove=drawTable(); /> Radius</p>' +
 			'<p><input type=range id=inpHeight min=300 max=1200 step=5 value=' + height + ' onmousemove=drawTable(); /> Height</p>' +
