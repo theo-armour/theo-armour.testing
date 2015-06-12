@@ -33,12 +33,17 @@ Latest release: [OpenDesk Half Sheet Table R2](http://theo-armour.github.io/theo
 
 This is a work in progress still at an early stage
 
+* Mobile device
+	* Model displays and allows zoom, pan and rotate
+	* But does not respond to parameter changes
 * Leg crossbar not included
 * Table top slots rudimentary and incomplete
 * Table legs missing slots and various details
 * Slots that are required to be non-perpendicular to surface have not yet been developed
 	* Angled slots may be tricky, but as of this writing we think it can be done
-
+* Incomplete and rudimentary positioning of legs
+* Intersect parameter makes arbitrary, unnecessary changes
+* Construction lines visible
 
 
 ###Copyright
