@@ -47,7 +47,7 @@
 			'<p><input type=range id=inpRadius min=200 max=600 step=5 value=' + radius + ' onmousemove=drawTable(); /> Radius</p>' +
 			'<p><input type=range id=inpHeight min=300 max=1200 step=5 value=' + height + ' onmousemove=drawTable(); /> Height</p>' +
 			'<p><input type=range id=inpIntersect min=0.05 max=0.8 step=0.05 value=' + intersect + ' onmousemove=drawTable(); /> Intersect</p>' +
-			'<p><input type=range id=inpThickness min=1 max=50 step=1 value=' + thickness + ' onmousemove=drawTable(); /> Thickness</p>' +
+			'<p><input type=range id=inpThickness min=1 max=50 step=1 value=' + thickness + ' /* onmousemove=drawTable(); */ /> Thickness</p>' +
 			'<div id=msg ></div>' +
 		'';
 
@@ -67,6 +67,8 @@
 
 		scene = new THREE.Scene();
 
+		inpThickness.onchange = drawTable(); 
+
 // axes
 		var axisHelper = new THREE.AxisHelper( 50 );
 		scene.add( axisHelper );
@@ -76,6 +78,11 @@
 		drawTable();
 
 	}
+
+function isMobile() {
+  try{ document.createEvent("TouchEvent"); return true; }
+  catch(e){ return false; }
+}
 
 	function drawTable() {
 
