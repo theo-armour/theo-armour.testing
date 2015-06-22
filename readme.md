@@ -4,8 +4,8 @@
 <span style=display:none; >[View as web page]( http://theo-armour.github.io/theo-armour.testing/index.html "view the files as apps." ) <input value="<< You are here" size=15 style="font:bold 11pt monospace;border-width:0;" ></span>  
 
 [Source code on GitHub]( https://github.com/theo-armour/theo-armour.testing )
+[OpenDesk Half Sheet Table]( http://theo-armour.github.io/theo-armour.testing/opendesk-half-sheet-table/latest/ )  
 
-[OpenDesk Half Sheet Table]( http://theo-armour.github.io/theo-armour.testing/opendesk-half-sheet-table/opendesk-half-sheet-table-r2.html )  
 [Read Me]( http://theo-armour.github.io/theo-armour.testing/opendesk-half-sheet-table/ )
 
 [OpenDesk Rotational Stool R1]( http://theo-armour.github.io/theo-armour.testing/display-open-desk-rotational-stool/build-open-desk-rotational-stool-r1.html )  

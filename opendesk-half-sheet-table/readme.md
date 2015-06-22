@@ -70,6 +70,7 @@ In no event shall the authors or copyright holders be liable for any claim, dama
 
 2015-06-21 ~ Theo
 
+* Add R3
 * May work on some mobile devices
 * Slight improvements to parameterization of the geometry
 
