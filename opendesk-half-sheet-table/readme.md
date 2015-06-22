@@ -6,7 +6,7 @@ Opendesk has a global network of makers and a collection of furniture by a range
 OpenDesk Half Sheet Table
 ===
 
-Latest release: [OpenDesk Half Sheet Table R2](http://theo-armour.github.io/theo-armour.testing/opendesk-half-sheet-table/opendesk-half-sheet-table-r2.html )
+Latest release: [OpenDesk Half Sheet Table](http://theo-armour.github.io/theo-armour.testing/opendesk-half-sheet-table/latest/ )
 
 <span style=display:none; >[View as web page]( http://theo-armour.github.io/theo-armour.testing/opendesk-half-sheet-table/ "View file as a web page." ) </span>  
 
@@ -68,6 +68,11 @@ In no event shall the authors or copyright holders be liable for any claim, dama
 
 ### Change Log
 
+2015-06-21 ~ Theo
+
+* May work on some mobile devices
+* Slight improvements to parameterization of the geometry
+
 2015-06-12 ~ Theo
 
-Upload to GitHub
+* Upload to GitHub
