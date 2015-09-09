@@ -15,12 +15,12 @@
 
 	var img = document.body.appendChild( document.createElement('img') );
 
-	// img.crossOrigin = '';
+	img.crossOrigin = '';
 
 	img.onload = function(e) {
 		context.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-		// var url = canvas.toDataURL(); // Read succeeds, canvas won't be dirty.
+		var url = canvas.toDataURL(); // Read succeeds, canvas won't be dirty.
 
 	};
 

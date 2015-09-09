@@ -27,7 +27,7 @@ $INSBASE
 9
 $EXTMIN
 10
-0
+213.774948094
 20
 -9342
 30
@@ -35,7 +35,7 @@ $EXTMIN
 9
 $EXTMAX
 10
-9343.3504519
+5652.80000049
 20
 14818
 30
@@ -143,7 +143,7 @@ $SPLINESEGS
 9
 $GRIDMODE
 70
-0
+1
 9
 $SNAPSTYLE
 70
@@ -151,9 +151,9 @@ $SNAPSTYLE
 9
 $PINSBASE
 10
-0
+29671.6065592
 20
-0
+30431.3013559
 30
 0
 9
@@ -175,7 +175,7 @@ $INSUNITS
 9
 $PSVPSCALE
 40
-0
+3.26912
 0
 ENDSEC
 0
@@ -223,9 +223,9 @@ AcDbViewportTableRecord
 21
 1
 12
-921.427371213
+1363.35576879
 22
-1085.23668165
+1205.65951793
 13
 0
 23
@@ -251,9 +251,9 @@ AcDbViewportTableRecord
 37
 0
 40
-763.972732301
+926.107073224
 41
-2.12939001848
+3.56656346749
 42
 50
 43
@@ -275,7 +275,7 @@ AcDbViewportTableRecord
 75
 0
 76
-0
+1
 77
 0
 78
@@ -1653,7 +1653,7 @@ AcDbSymbolTableRecord
 100
 AcDbTextStyleTableRecord
 2
-1 1000 lt 2.0mm text
+standard
 70
 0
 40
@@ -1667,7 +1667,7 @@ AcDbTextStyleTableRecord
 42
 1
 3
-1 1000 lt 2.0mm text
+standard
 4
 
 0
@@ -1681,7 +1681,7 @@ AcDbSymbolTableRecord
 100
 AcDbTextStyleTableRecord
 2
-standard
+1 1000 lt 2.0mm text
 70
 0
 40
@@ -1695,7 +1695,7 @@ standard
 42
 1
 3
-standard
+1 1000 lt 2.0mm text
 4
 
 0
