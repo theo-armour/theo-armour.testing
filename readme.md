@@ -7,7 +7,6 @@
 [Random Walk R3]( http://theo-armour.github.io/theo-armour.testing/random-walk/random-walk-r3.html )  
 
 [OpenDesk Half Sheet Table]( http://theo-armour.github.io/theo-armour.testing/opendesk-half-sheet-table/latest/ )  
-
 [Read Me]( http://theo-armour.github.io/theo-armour.testing/opendesk-half-sheet-table/ )
 
 [OpenDesk Rotational Stool R1]( http://theo-armour.github.io/theo-armour.testing/display-open-desk-rotational-stool/build-open-desk-rotational-stool-r1.html )  
