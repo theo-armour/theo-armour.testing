@@ -4,7 +4,7 @@
 <span style=display:none; >[View as web page]( http://theo-armour.github.io/theo-armour.testing/index.html "view the files as apps." ) <input value="<< You are here" size=15 style="font:bold 11pt monospace;border-width:0;" ></span>  
 [Source code on GitHub]( https://github.com/theo-armour/theo-armour.testing )
 
-[Random Wlk R3]( http://theo-armour.github.io/theo-armour.testing/random-walk/random-walk-r3.html )  
+[Random Walk R3]( http://theo-armour.github.io/theo-armour.testing/random-walk/random-walk-r3.html )  
 
 [OpenDesk Half Sheet Table]( http://theo-armour.github.io/theo-armour.testing/opendesk-half-sheet-table/latest/ )  
 
