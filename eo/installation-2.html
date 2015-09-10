@@ -24,9 +24,7 @@
 		document.body.style.cssText = ' font: bold 12pt monospace; margin: 0; ';
 
 		var info = document.body.appendChild( document.createElement( 'div' ) );
-		info.innerHTML =
-			'<img id=image src=' + slides[ count ] + ' />' +
-
+			info.innerHTML = '<img id=image src=' + slides[ count ] + ' style=height:100%;width:100%; />'
 		'';
 
 		setInterval( replaceImage, 30000 );
