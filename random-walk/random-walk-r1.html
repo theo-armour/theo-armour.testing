@@ -11,7 +11,7 @@
 <script src=http://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
 <script>
 	var info, stats, renderer, scene, camera, controls;
-		var geometry, material, mesh, line;
+	var geometry, material, mesh, line;
 
 	var startTime = performance.now();
 	var count = 0;
@@ -59,6 +59,8 @@
 
 	function addVertex() {
 
+		if ( count > 550000 ) { return; }  // you can go higher but Chrome seems t crash at just over 11000000
+
 		for ( var i = 0; i < 1000; i++ ) {
 			vertex = vertices[ count++ ].clone(); 
 			vertex.add( v( 2 * Math.random() - 1, 2 * Math.random() - 1,  2 * Math.random() - 1) );
@@ -71,7 +73,7 @@
 		line = new THREE.Line( geometry, material );
 		scene.add( line );
 
-		msg.innerHTML = 'count = ' + count;
+		msg.innerHTML = 'line count:' + count + ' time: ' + ( 0.001 * ( performance.now() - startTime )).toFixed( 1 );
 
 	}
 

@@ -11,11 +11,11 @@
 <script src=http://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
 <script>
 	var info, stats, renderer, scene, camera, controls;
-		var geometry, material, mesh, line;
+	var geometry, material, mesh, line;
 
 	var startTime = performance.now();
 	var count = 0;
-	var iterations = 50000;
+	var iterations = 95000;
 
 	init();
 	animate();
@@ -77,11 +77,14 @@
 		geometry = new THREE.Geometry();
 		geometry.vertices = vertices;
 
+//		scene.remove( line );
 		line = new THREE.Line( geometry, material );
 		scene.add( line );
 
 		count += iterations;
-		msg.innerHTML = 'line count:' + count + ' time: ' + ( 0.001 * ( performance.now() - startTime )).toFixed( 1 );
+		msg.innerHTML = 'line count:' + count + 
+		' - iterations: ' + iterations +
+		' - time: ' + ( 0.001 * ( performance.now() - startTime )).toFixed( 1 );
 
 	}
 

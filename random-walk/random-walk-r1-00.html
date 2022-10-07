@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang=en >
 <head>
-<title>Random Walk R2</title>
+<title>line-add-vertices</title>
 <meta charset=utf-8 />
 <meta name=viewport content=width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0 />
 </head>
@@ -59,28 +59,21 @@
 
 	function addVertex() {
 
-		if ( count > 10000000 ) { return; }
+			if ( count > 500000 ) { return; }  // you can go higher but Chrome seems t crash at just over 11000000
 
-		geometry = new THREE.Geometry();
-		geometry.vertices.push( vertices[ vertices.length - 1] );
-		vertices = geometry.vertices;
-
-		for ( var i = 0; i < 90000; i++ ) {
-
-			vertex = vertices[ i ].clone(); 
+		for ( var i = 0; i < 1000; i++ ) {
+			vertex = vertices[ count++ ].clone(); 
 			vertex.add( v( 2 * Math.random() - 1, 2 * Math.random() - 1,  2 * Math.random() - 1) );
 			vertices.push( vertex );
-
 		}
 
 		geometry = new THREE.Geometry();
 		geometry.vertices = vertices;
-
+		scene.remove( line );
 		line = new THREE.Line( geometry, material );
 		scene.add( line );
 
-		count += 90000;
-		msg.innerHTML = 'line count:' + count + ' time: ' + ( 0.001 * ( performance.now() - startTime )).toFixed( 1 );
+		msg.innerHTML = 'count = ' + count;
 
 	}
 
